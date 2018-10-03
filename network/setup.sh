@@ -2,7 +2,7 @@
 
 
 # copy the configuration file to its folder
-cp ./wpa_supplicant.conf /etc/wpa_supplicant/wpa_supliccant.conf
+cp ./wpa_supplicant.conf /etc/wpa_supplicant/wpa_supliccant.conf -b
 
 # kill all instances of wpa_supplicant for not having conflicts
 killall wpa_supplicant
