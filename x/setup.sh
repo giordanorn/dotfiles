@@ -2,4 +2,4 @@
 
 
 # copy the dotfiles to its destination folder
-cp ./.xinitrc ~/.xinitrc --backup --verbose
+cp .xinitrc ~/.xinitrc --backup --verbose
