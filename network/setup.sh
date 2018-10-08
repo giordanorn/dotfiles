@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 # copy the configuration file to its folder
 # cp ./wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant.conf --verbose --backup
 
