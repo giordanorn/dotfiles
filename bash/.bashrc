@@ -57,7 +57,7 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\][\u\[\033[00;34m\]@\h\[\033[00m\]]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
@@ -97,11 +97,10 @@ alias l='ls -CF'
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # Some custom aliases
-alias r='ranger'
-alias v='vim'
-alias sv='sudo vim'
 alias wc='sudo wpa_cli'
-alias blueman='blueman-manager'
+gc(){
+	git clone https://github.com/$1/$2
+}
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
