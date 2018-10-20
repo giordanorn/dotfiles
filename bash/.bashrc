@@ -98,6 +98,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 
 # Some custom aliases
 alias wc='sudo wpa_cli'
+alias q=exit
 gc(){
 	git clone https://github.com/$1/$2
 }
