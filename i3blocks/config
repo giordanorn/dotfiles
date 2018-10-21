@@ -24,7 +24,7 @@
 #
 # The top properties below are applied to every block, but can be overridden.
 # Each block command defaults to the script name to avoid boilerplate.
-command=/usr/share/i3blocks/$BLOCK_NAME
+command=~/.config/i3blocks/scripts/$BLOCK_NAME
 separator_block_width=15
 markup=none
 
@@ -89,11 +89,9 @@ interval=1
 # The script may be called with -w and -c switches to specify thresholds,
 # see the script for details.
 [cpu_usage]
-label=CPU
-interval=3
+label=⚙
+interval=2
 align=center
-min_width=CPU: 100.00%
-#separator=false
 
 #[load_average]
 #interval=10
@@ -108,9 +106,12 @@ label=⚡
 interval=1
 
 # Date Time
-#
+[date]
+command=date '+📆 %a %d %b'
+interval=once
+
 [time]
-command=date '+%d/%m/%Y %H:%M'
+command=date '+⌚ %H:%M'
 interval=60
 
 # Generic media player support
