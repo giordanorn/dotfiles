@@ -28,24 +28,11 @@ command=~/.config/i3blocks/scripts/$BLOCK_NAME
 separator_block_width=15
 markup=none
 
-# Volume indicator
-#
-# The first parameter sets the step (and units to display)
-# The second parameter overrides the mixer selection
-# See the script for details.
-[volume]
-#label=VOL
-label=♪
-instance=Master
-#instance=PCM
-interval=once
-signal=10
-
 # Memory usage
 #
 # The type defaults to "mem" if the instance is not specified.
 [memory]
-label=MEM
+label=🗜
 separator=false
 interval=30
 
@@ -61,7 +48,7 @@ interval=30
 # The script may be called with a optional argument to set the alert
 # (defaults to 10 for 10%).
 [disk]
-label=HOME
+label=🖿
 #instance=/mnt/data
 interval=30
 
@@ -69,14 +56,24 @@ interval=30
 #
 # If the instance is not specified, use the interface used for default route.
 # The address can be forced to IPv4 or IPv6 with -4 or -6 switches.
+
+#[ping]
+#command=ping "8.8.8.8"
+#interval=persist
+
+#[ssid]
+#command=iwgetid "-r"
+#interval=1
+
+[wifi]
+instance=wls1
+label=📶
+interval=3
+separator=false
+
 [iface]
 #instance=wlan0
 color=#00FF00
-interval=1
-separator=false
-
-[wifi]
-#instance=wlp3s0
 interval=1
 separator=false
 
@@ -91,17 +88,28 @@ interval=1
 [cpu_usage]
 label=⚙
 interval=2
-align=center
+
+[volume]
+#special characters
+# mute 🔇
+# low 🔈
+# medium 🔉
+# high 🔊
+label=🔊
+instance=Master
+#instance=PCM
+interval=once
+signal=10
 
 #[load_average]
 #interval=10
 
-# Battery indicator
-#
-# The battery instance defaults to 0.
 [battery]
-#label=BAT
-label=⚡
+# thunder ⚡
+# lightning 🗲
+# battery 🔋
+# electric plug 🔌
+label=🗲
 #instance=1
 interval=1
 
@@ -111,7 +119,7 @@ command=date '+📆 %a %d %b'
 interval=once
 
 [time]
-command=date '+⌚ %H:%M'
+command=date '+⏲ %H:%M'
 interval=60
 
 # Generic media player support

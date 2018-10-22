@@ -55,7 +55,13 @@ case $BLOCK_BUTTON in
   3) echo -n "$IPADDR" | xclip -q -se c ;;
 esac
 
+SEPARATOR=""
+SSID=$(iwgetid -r)
+
+if [[ $SSID != "" ]]; then
+	SEPARATOR=" ← "
+fi
 #------------------------------------------------------------------------
 
-echo "$IPADDR" # full text
+echo "$SSID$SEPARATOR$IPADDR" # full text
 echo "$IPADDR" # short text
