@@ -15,10 +15,6 @@ set $mod Mod4
 # is used in the bar {} block below.
 font pango:Open Sans Regular 8
 
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-#font pango:DejaVu Sans Mono 8
-
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # The font above is very space-efficient, that is, it looks good, sharp and
@@ -42,7 +38,7 @@ bindsym $mod+Shift+Home exec reboot
 bindsym $mod+q kill
 
 # lock screen
-bindsym $mod+Shift+p exec i3lock-fancy
+bindsym $mod+Shift+w exec i3lock-fancy
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run
@@ -132,6 +128,9 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
+# take screenshot
+bindsym $mod+Shift+p exec scrot --silent --quality 100 ~/personal/images/screenshots/screenshot_$(date +"%y%m%d_%H%M%S").png
+
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -173,4 +172,8 @@ bindsym $mod+o mode "launch"
 bar {
 	status_command i3blocks
 	position top
+	font pango:Symbola Regular, Open Sans Regular 10
 }
+
+exec nitrogen --set-zoom-fill $HOME/personal/images/wallpapers/daniel-leone-197357-unsplash.jpg 
+
