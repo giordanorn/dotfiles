@@ -56,12 +56,14 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\][\u\[\033[00;34m\]@\h\[\033[00m\]]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
+# if [ "$color_prompt" = yes ]; then
+#     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\][\u\[\033[00;34m\]@\h\[\033[00m\]]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+# else
+#     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+# fi
 unset color_prompt force_color_prompt
+
+PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\][\u\[\033[00;34m\]@\h\[\033[00m\]]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
@@ -91,6 +93,9 @@ fi
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+alias rd='rm -r'
+
+alias ..='cd ..'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -102,6 +107,10 @@ alias q=exit
 gc(){
 	git clone https://github.com/$1/$2
 }
+alias fmcmonstu='vim $HOME/personal/aulabook-fmcmon/content/2018.2/$(date +"%Y%m%d").giordano.stu'
+alias fmcmontex='vim $HOME/personal/aulabook-fmcmon/content/2018.2/$(date +"%Y%m%d").giordano.tex'
+alias fmcmon='vim $HOME/personal/aulabook-fmcmon/content/2018.2/$(date +"%Y%m%d").stu'
+
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like

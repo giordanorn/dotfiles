@@ -32,7 +32,7 @@ markup=none
 #
 # The type defaults to "mem" if the instance is not specified.
 [memory]
-label=🗜
+label=⛘
 separator=false
 interval=30
 
@@ -43,7 +43,6 @@ interval=30
 #interval=30
 
 # Disk usage
-#
 # The directory defaults to $HOME if the instance is not specified.
 # The script may be called with a optional argument to set the alert
 # (defaults to 10 for 10%).
@@ -86,7 +85,7 @@ interval=1
 # The script may be called with -w and -c switches to specify thresholds,
 # see the script for details.
 [cpu_usage]
-label=⚙
+label=🏿
 interval=2
 
 [volume]
@@ -115,11 +114,13 @@ interval=1
 
 # Date Time
 [date]
-command=date '+📆 %a %d %b'
+label=📆
+command=date '+%a %d %b'
 interval=once
 
 [time]
-command=date '+⏲ %H:%M'
+label=⏲
+command=date '+%H:%M'
 interval=60
 
 # Generic media player support
@@ -161,3 +162,4 @@ interval=60
 #instance=NUM
 #interval=once
 #signal=11
+

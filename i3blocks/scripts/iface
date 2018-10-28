@@ -64,4 +64,4 @@ fi
 #------------------------------------------------------------------------
 
 echo "$SSID$SEPARATOR$IPADDR" # full text
-echo "$IPADDR" # short text
+#echo "$IPADDR" # short text
