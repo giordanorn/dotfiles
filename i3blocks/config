@@ -59,12 +59,12 @@ interval=30
 instance=wls1
 label=📶
 interval=3
-separator=false
+
 [iface]
 #instance=wlan0
 color=#00FF00
 interval=1
-separator=false
+
 [bandwidth]
 #instance=eth0
 interval=1
@@ -73,10 +73,10 @@ interval=1
 [cpu_usage]
 label=🏿
 interval=2
-separator=false
+
 [temperature]
 label=🌡
-interval=10
+interval=5
 
 [volume]
 #special characters
