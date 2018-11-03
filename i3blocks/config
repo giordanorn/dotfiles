@@ -55,38 +55,28 @@ interval=30
 #
 # If the instance is not specified, use the interface used for default route.
 # The address can be forced to IPv4 or IPv6 with -4 or -6 switches.
-
-#[ping]
-#command=ping "8.8.8.8"
-#interval=persist
-
-#[ssid]
-#command=iwgetid "-r"
-#interval=1
-
 [wifi]
 instance=wls1
 label=📶
 interval=3
 separator=false
-
 [iface]
 #instance=wlan0
 color=#00FF00
 interval=1
 separator=false
-
 [bandwidth]
 #instance=eth0
 interval=1
 
-# CPU usage
-#
-# The script may be called with -w and -c switches to specify thresholds,
-# see the script for details.
+# CPU usage and Temperature
 [cpu_usage]
 label=🏿
 interval=2
+separator=false
+[temperature]
+label=🌡
+interval=10
 
 [volume]
 #special characters
@@ -137,15 +127,6 @@ interval=60
 # Support multiple VPN, with colors.
 #[openvpn]
 #interval=20
-
-# Temperature
-#
-# Support multiple chips, though lm-sensors.
-# The script may be called with -w and -c switches to specify thresholds,
-# see the script for details.
-#[temperature]
-#label=TEMP
-#interval=10
 
 # Key indicators
 #
