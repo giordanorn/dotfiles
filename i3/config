@@ -26,6 +26,8 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
+# start xterm on current directory of a focused xterm
+bindsym $mod+Shift+Return exec xterm -e "cd `xcwd` && $SHELL"
 
 # shutdown your machine
 bindsym $mod+Shift+End exec shutdown now
@@ -159,7 +161,7 @@ mode "launch" {
 	bindsym q exec qutebrowser
 	bindsym c exec chromium-browser
 	bindsym t exec telegram
-#	bindsym s exec spotify
+	bindsym s exec spotify
 	bindsym w exec wicd-gtk
 	bindsym v exec pavucontrol
 	bindsym b exec blueman-applet; exec blueman-manager
@@ -184,3 +186,4 @@ hide_edge_borders both
 assign [class="qutebrowser"] 2
 assign [class="Chromium"] 2
 assign [class="Telegram"] 3
+assign [instance="Spotify"] 4
