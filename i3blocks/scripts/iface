@@ -32,7 +32,9 @@ fi
 
 #------------------------------------------------------------------------
 
-if [[ "$(cat /sys/class/net/$IF/operstate)" = 'down' ]]; then
+
+if ! [ -e "/sys/class/net/${IF}/operstate" ] || ! [ "`cat /sys/class/net/${IF}/operstate`" = "up" ]
+then
   echo down # full text
   echo down # short text
   echo \#FF0000 # color
@@ -59,9 +61,9 @@ SEPARATOR=""
 SSID=$(iwgetid -r)
 
 if [[ $SSID != "" ]]; then
-	SEPARATOR=" ← "
+	SEPARATOR=" at "
 fi
 #------------------------------------------------------------------------
 
-echo "$SSID$SEPARATOR$IPADDR" # full text
+echo "$IPADDR$SEPARATOR$SSID" # full text
 #echo "$IPADDR" # short text

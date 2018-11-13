@@ -32,7 +32,7 @@ markup=none
 #
 # The type defaults to "mem" if the instance is not specified.
 [memory]
-label=⛘
+label=
 separator=false
 interval=30
 
@@ -47,44 +47,58 @@ interval=30
 # The script may be called with a optional argument to set the alert
 # (defaults to 10 for 10%).
 [disk]
-label=🖿
-#instance=/mnt/data
+label=
+instance=/root
+separator=false
 interval=30
 
+[disk]
+label=
+instance=/home
+interval=30
 # Network interface monitoring
 #
 # If the instance is not specified, use the interface used for default route.
 # The address can be forced to IPv4 or IPv6 with -4 or -6 switches.
 [wifi]
 instance=wls1
-label=📶
+label=
 interval=3
+separator=false
 
 [iface]
 #instance=wlan0
+label=
 color=#00FF00
 interval=1
+separator=false
 
-[bandwidth]
+[downspeed]
+label=
 #instance=eth0
 interval=1
+separator=false
+color=#f22c40
+
+[upspeed]
+label=
+#instance=eth0
+interval=1
+color=#407ee7
 
 # CPU usage and Temperature
 [cpu_usage]
-label=🏿
+label=
 interval=2
+separator=false
 
 [temperature]
-label=🌡
+label=
+command=echo $(acpi -t | grep Thermal\ 1 | cut -d " " -f4 | cut -d "." -f1 )°C
 interval=5
 
 [volume]
-#special characters
-# mute 🔇
-# low 🔈
-# medium 🔉
-# high 🔊
-label=🔊
+label=
 instance=Master
 #instance=PCM
 interval=once
@@ -94,22 +108,19 @@ signal=10
 #interval=10
 
 [battery]
-# thunder ⚡
-# lightning 🗲
-# battery 🔋
-# electric plug 🔌
-label=🗲
+label=
 #instance=1
 interval=1
 
-# Date Time
+# Date and Time
 [date]
-label=📆
+label=
 command=date '+%a %d %b'
-interval=once
+interval=60
+separator=false
 
 [time]
-label=⏲
+label=
 command=date '+%H:%M'
 interval=60
 
