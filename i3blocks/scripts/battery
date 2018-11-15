@@ -1,74 +1,69 @@
-#!/usr/bin/perl
-#
-# Copyright 2014 Pierre Mavro <deimos@deimos.fr>
-# Copyright 2014 Vivien Didelot <vivien@didelot.org>
-#
-# Licensed under the terms of the GNU GPL v3, or any later version.
-#
-# This script is meant to use with i3blocks. It parses the output of the "acpi"
-# command (often provided by a package of the same name) to read the status of
-# the battery, and eventually its remaining time (to full charge or discharge).
-#
-# The color will gradually change for a percentage below 85%, and the urgency
-# (exit code 33) is set if there is less that 5% remaining.
+#!/usr/bin/bash
 
-use strict;
-use warnings;
-use utf8;
+# colors
+red="#FF0000"
+orange="#FFA500"
+yellow="#FFFF00"
+green="#00FF00"
 
-my $acpi;
-my $status;
-my $percent;
-my $full_text;
-my $short_text;
-my $bat_number = $ENV{BLOCK_INSTANCE} || 0;
+# icons for the label (FontAwesome)
+bat_empty=""
+bat_low=""
+bat_medium=""
+bat_avg=""
+bat_full=""
+charging=""
+loading=""
 
-# read the first line of the "acpi" command output
-open (ACPI, "acpi -b | grep 'Battery $bat_number' |") or die;
-$acpi = <ACPI>;
-close(ACPI);
+# main command (acpi)
+output=$(acpi -b)
 
-# fail on unexpected output
-if ($acpi !~ /: (\w+), (\d+)%/) {
-	die "$acpi\n";
-}
+# get current battery percentual charge
+percent=$(echo "$output" | cut -d " " -f4 | tr -d ,%)
 
-$status = $1;
-$percent = $2;
-$full_text = "$percent%";
+if [[ -n $(echo $output | grep Charging) ]]; then
+	label=$charging
+	if [[ $percent -eq 100 ]]; then
+		color=$green
+	fi
+else
+	if [[ -n $(echo $output | grep Unknown) ]]; then
+		# disabled due to acpi reporting Unknown behavior in some actually known momments
+		# label=$loading
+		label=$charging
+	elif [[ $percent -lt 10 ]]; then
+		color=$red
+		label=$bat_empty
+	elif [[ $percent -lt 20 ]]; then
+		color=$red
+		label=$bat_low
+	elif [[ $percent -lt 40 ]]; then
+		color=$orange
+		label=$bat_medium
+	elif [[ $percent -lt 70 ]]; then
+		color=$yellow
+		label=$bat_avg
+	else
+		label=$bat_full
+	fi
 
-if ($status eq 'Discharging') {
-	$full_text .= ' DIS';
-} elsif ($status eq 'Charging') {
-	$full_text .= ' CHR';
-}
+	if [[ -n $(echo $output | grep Discharging) ]]; then
+		estimated="$(echo $output | cut -d " " -f5 | cut -c1-5 | tr -d a-zA-Z )"
+		if [[ -n $estimated ]]; then
+			hour=$(echo $estimated | cut -c1-2)
+			minutes=$(echo $estimated | cut -c4-5)
+			if [[ $hour -eq 0 ]];then
+				hour=""
+				minutes="${minutes}m"
+			else
+				hour="${hour}h"
+				minutes="${minutes}"
+			fi
+			estimated="($hour$minutes)"
+		fi
+	fi
+fi
 
-$short_text = $full_text;
-
-if ($acpi =~ /(\d\d:\d\d):/) {
-	$full_text .= " ($1)";
-}
-
-# print text
-print "$full_text\n";
-print "$short_text\n";
-
-# consider color and urgent flag only on discharge
-if ($status eq 'Discharging') {
-
-	if ($percent < 20) {
-		print "#FF0000\n";
-	} elsif ($percent < 40) {
-		print "#FFAE00\n";
-	} elsif ($percent < 60) {
-		print "#FFF600\n";
-	} elsif ($percent < 85) {
-		print "#A8FF00\n";
-	}
-
-	if ($percent < 5) {
-		exit(33);
-	}
-}
-
-exit(0);
+echo "$label $percent%$estimated"	# full text
+echo "$label $percent%$estimated"	# short text
+echo "$color"				# display color
