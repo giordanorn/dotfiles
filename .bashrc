@@ -95,7 +95,6 @@ alias la='ls -A'
 alias l='ls -CF'
 alias rd='rm -r'
 alias ..='cd ..'
-alias wc='sudo wpa_cli'
 alias q=exit
 alias logout='pkill -KILL -u $USER'
 gc(){
