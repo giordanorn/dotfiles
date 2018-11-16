@@ -7,9 +7,9 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
-for_window [class="^.*"] border pixel 3
-gaps inner 4
-gaps outer 2
+for_window [class="^.*"] border pixel 2
+#gaps inner 4
+#gaps outer 2
 
 set $mod Mod4
 
@@ -129,6 +129,7 @@ mode "launch" {
 #	bindsym c exec chromium-browser
 	bindsym t exec telegram-desktop
 	bindsym s exec spotify
+	bindsym g exec steam
 	bindsym w exec wicd-gtk
 	bindsym v exec pavucontrol
 #	bindsym b exec blueman-applet; exec blueman-manager
@@ -151,6 +152,7 @@ assign [class="qutebrowser"] 2
 assign [class="Chromium"] 2
 assign [class="Telegram"] 3
 assign [instance="Spotify"] 4
+assign [class="Steam"] 5
 
 
 exec --no-startup-id nitrogen --set-zoom-fill $HOME/personal/images/wallpapers/sergey-pesterev-228813-unsplash.jpg
