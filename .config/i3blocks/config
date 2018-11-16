@@ -94,7 +94,6 @@ separator=false
 
 [temperature]
 label=
-command=echo $(acpi -t | grep Thermal\ 1 | cut -d " " -f4 | cut -d "." -f1 )°C
 interval=5
 
 [volume]
@@ -108,8 +107,6 @@ signal=10
 #interval=10
 
 [battery]
-label=
-#instance=1
 interval=1
 
 # Date and Time
