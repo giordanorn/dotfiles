@@ -21,8 +21,27 @@ output=$(acpi -b)
 # get current battery percentual charge
 percent=$(echo "$output" | cut -d " " -f4 | tr -d ,%)
 
+#return current estimated time for charging|discharging
+estimated_time() {
+	_time="$(echo $output | cut -d " " -f5 | cut -c1-5 | tr -d a-zA-Z )"
+	if [[ -n $_time ]]; then
+		_hour=$(echo $_time | cut -c1-2)
+		_minutes=$(echo $_time | cut -c4-5)
+		if [[ $_hour -eq 0 ]];then
+			_hour=""
+			_minutes="${_minutes}m"
+		else
+			_hour="${_hour}h"
+			_minutes="${_minutes}"
+		fi
+		_time="($_hour$_minutes)"
+	fi
+	echo $_time;
+}
+
 if [[ -n $(echo $output | grep Charging) ]]; then
 	label=$charging
+	estimated=`estimated_time`
 	if [[ $percent -eq 100 ]]; then
 		color=$green
 	fi
@@ -31,6 +50,9 @@ else
 		# disabled due to acpi reporting Unknown behavior in some actually known momments
 		# label=$loading
 		label=$charging
+	elif [[ -n $(echo $output | grep Full) ]]; then
+		label=$charging
+		color=$green
 	elif [[ $percent -lt 10 ]]; then
 		color=$red
 		label=$bat_empty
@@ -48,21 +70,10 @@ else
 	fi
 
 	if [[ -n $(echo $output | grep Discharging) ]]; then
-		estimated="$(echo $output | cut -d " " -f5 | cut -c1-5 | tr -d a-zA-Z )"
-		if [[ -n $estimated ]]; then
-			hour=$(echo $estimated | cut -c1-2)
-			minutes=$(echo $estimated | cut -c4-5)
-			if [[ $hour -eq 0 ]];then
-				hour=""
-				minutes="${minutes}m"
-			else
-				hour="${hour}h"
-				minutes="${minutes}"
-			fi
-			estimated="($hour$minutes)"
-		fi
+		estimated=`estimated_time`
 	fi
 fi
+
 
 echo "$label $percent%$estimated"	# full text
 echo "$label $percent%$estimated"	# short text
