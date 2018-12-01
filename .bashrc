@@ -87,23 +87,56 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # colored GCC warnings and errors
-#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# some more ls aliases
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias rd='rm -r'
 alias ..='cd ..'
-alias q=exit
+alias q='exit'
+alias s='sudo'
+alias v='vim'
+alias sv='sudo vim'
+alias r='ranger'
+alias sr='sudo ranger'
 alias logout='pkill -KILL -u $USER'
 gc(){
 	git clone https://github.com/$1/$2
 }
-alias fmcmonstu='vim $HOME/personal/aulabook-fmcmon/content/2018.2/$(date +"%Y%m%d").giordano.stu'
-alias fmcmontex='vim $HOME/personal/aulabook-fmcmon/content/2018.2/$(date +"%Y%m%d").giordano.tex'
-alias fmcmon='vim $HOME/personal/aulabook-fmcmon/content/2018.2/$(date +"%Y%m%d").stu'
 
+extract() {
+    if [ -f $1 ] ; then
+        case $1 in
+            *.tar.bz2)   tar xjf $1        ;;
+            *.tar.gz)    tar xzf $1     ;;
+            *.bz2)       bunzip2 $1       ;;
+            *.rar)       rar x $1     ;;
+            *.gz)        gunzip $1     ;;
+            *.tar)       tar xf $1        ;;
+            *.tbz2)      tar xjf $1      ;;
+            *.tgz)       tar xzf $1       ;;
+            *.zip)       unzip $1     ;;
+            *.Z)         uncompress $1  ;;
+            *.7z)        7z x $1    ;;
+            *)           echo "'$1' cannot be extracted via extract()" ;;
+        esac
+    else
+        echo "'$1' is not a valid file"
+    fi
+}
+alias ex='extract'
+
+fmcmon() {
+    if [ -n $1 ] ; then
+        case $1 in
+	    "stu")	vim $HOME/personal/aulabook-fmcmon/content/2018.2/$(date +"%Y%m%d").giordano.stu ;;
+	    "tex")	vim $HOME/personal/aulabook-fmcmon/content/2018.2/$(date +"%Y%m%d").giordano.tex ;;
+	    *)		vim $HOME/personal/aulabook-fmcmon/content/2018.2/$(date +"%Y%m%d").stu ;;
+        esac
+    fi
+}
+alias fmc=fmcmon
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
