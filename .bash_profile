@@ -1,11 +1,10 @@
-#
-# ~/.bash_profile
-#
 
-[[ -f ~/.bashrc ]] && source ~/.bashrc
+#!/bin/bash
 
-# Start graphical server if i3 not already running.
-if [[ "$(tty)" = "/dev/tty1" ]]; then
+export EDITOR="vim"
+export BROWSER="qutebrowser"
+export READER="zathura"
+
+if [ "$(tty)" = "/dev/tty1" ]; then
 	pgrep -x i3 || exec startx
 fi
-
