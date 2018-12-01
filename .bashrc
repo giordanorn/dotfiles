@@ -100,7 +100,6 @@ alias v='vim'
 alias sv='sudo vim'
 alias r='ranger'
 alias sr='sudo ranger'
-alias logout='pkill -KILL -u $USER'
 gc(){
 	git clone https://github.com/$1/$2
 }
