@@ -48,8 +48,8 @@ if [[ -n $(echo $output | grep Charging) ]]; then
 else
 	if [[ -n $(echo $output | grep Unknown) ]]; then
 		# disabled due to acpi reporting Unknown behavior in some actually known momments
-		# label=$loading
 		label=$charging
+		color=$green
 	elif [[ -n $(echo $output | grep Full) ]]; then
 		label=$charging
 		color=$green
