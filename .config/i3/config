@@ -109,10 +109,12 @@ bindsym $mod+r mode "resize"
 # launch applications
 mode "launch" {
 	# main apps
-	bindsym q exec qutebrowser
-	bindsym c exec chromium
+#	bindsym q exec qutebrowser
+#	bindsym c exec chromium
+#	bindsym f exec firefox
+	bindsym w exec vivaldi-stable
 	bindsym t exec telegram-desktop
-	bindsym w exec whatsapp-web-desktop
+	bindsym z exec whatsapp-web-desktop
 	bindsym s exec spotify
 	bindsym g exec steam
 
@@ -135,16 +137,17 @@ bar {
 }
 
 # assign programs to specific workspaces
-assign [class="qutebrowser"] 2
-assign [class="Chromium"] 2
+## browsers to workspace 2
+for_window [class="qutebrowser"] move to workspace 2
+for_window [class="Chromium"] move to workspace 2
+for_window [class="Firefox"] move to workspace 2
+for_window [class="Vivaldi"] move to workspace 2
+
 assign [class="Telegram"] 3
 assign [class="Steam"] 5
 for_window [class="Spotify"] move to workspace 4
 
 hide_edge_borders both
-
-# set wallpaper
-exec --no-startup-id nitrogen --set-zoom-fill $HOME/personal/images/wallpapers/sergey-pesterev-228813-unsplash.jpg
 
 # set keyboard layout
 exec --no-startup-id setxkbmap -model thinkpad60 -layout br -variant abnt2
