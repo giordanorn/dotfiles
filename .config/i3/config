@@ -109,10 +109,7 @@ bindsym $mod+r mode "resize"
 # launch applications
 mode "launch" {
 	# main apps
-#	bindsym q exec qutebrowser
-#	bindsym c exec chromium
-#	bindsym f exec firefox
-	bindsym w exec vivaldi-stable
+	bindsym q exec qutebrowser
 	bindsym t exec telegram-desktop
 	bindsym z exec whatsapp-web-desktop
 	bindsym s exec spotify
@@ -134,18 +131,25 @@ bar {
 	position top
 	font pango:monospace 10
 	separator_symbol "·"
+	colors {
+		background #222222
+		statusline #ffffff
+		separator #666666
+
+		focused_workspace  #4c7899 #285577 #ffffff
+		active_workspace   #333333 #5f676a #ffffff
+		inactive_workspace #333333 #222222 #888888
+		urgent_workspace   #2f343a #900000 #ffffff
+		binding_mode       #2f343a #900000 #ffffff
+	}
 }
 
 # assign programs to specific workspaces
-## browsers to workspace 2
 for_window [class="qutebrowser"] move to workspace 2
-for_window [class="Chromium"] move to workspace 2
-for_window [class="Firefox"] move to workspace 2
-for_window [class="Vivaldi"] move to workspace 2
-
-assign [class="Telegram"] 3
-assign [class="Steam"] 5
+for_window [class="Telegram"] move to workspace 3
+for_window [class="Steam"] move to workspace 5
 for_window [class="Spotify"] move to workspace 4
+for_window [class="WhatsApp"] move to workspace 4
 
 hide_edge_borders both
 
