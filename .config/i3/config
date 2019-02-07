@@ -1,14 +1,15 @@
 # i3 configuration file
 
-for_window [class="^.*"] border pixel 2
-#gaps inner 4
-#gaps outer 2
-
 set $mod Mod4
-
 floating_modifier $mod
 
 font pango:monospace 9
+
+# gaps configuration
+for_window [class="^.*"] border pixel 2
+smart_gaps on
+gaps inner 8
+gaps outer 4
 
 # open a terminal instance
 bindsym $mod+Return exec i3-sensible-terminal
