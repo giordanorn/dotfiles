@@ -89,7 +89,8 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 # take screenshot
 bindsym Print exec scrot --silent --quality 100 ~/pictures/screenshots/screenshot_$(date +"IMG_%Y%m%d_%H%M%S").png
-
+bindsym $mod+Print exec escrotum -C
+bindsym $mod+Shift+Print exec --no-startup-id escrotum -Cs
 
 # media controlling
 bindsym XF86AudioPlay exec playerctl play-pause
@@ -97,7 +98,7 @@ bindsym XF86AudioStop exec playerctl stop
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
-# volume controls
+# volume controls @TODO
 #bindsym XF86RaiseVolume exec
 #bindsym XF86RaiseVolume exec 
 
@@ -127,6 +128,7 @@ mode "launch" {
 	bindsym g exec steam
 
 	# utils
+	bindsym e exec pcmanfm
 	bindsym b exec blueman-applet
 	bindsym n exec nm-applet
 	bindsym v exec pavucontrol
