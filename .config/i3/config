@@ -1,15 +1,18 @@
 # i3 configuration file
 
-set $mod Mod4
-floating_modifier $mod
+set $screenshots_folder "~/pictures/screenshots"
 
-font pango:monospace 9
-
-# gaps configuration
 for_window [class="^.*"] border pixel 2
+
 smart_gaps on
 gaps inner 8
 gaps outer 4
+
+set $mod Mod4
+
+floating_modifier $mod
+
+font pango:monospace 9
 
 # open a terminal instance
 bindsym $mod+Return exec i3-sensible-terminal
@@ -21,7 +24,7 @@ bindsym $mod+d exec dmenu_run
 # shutdown, reboot and lock-screen
 bindsym $mod+Shift+End exec shutdown now
 bindsym $mod+Shift+Home exec reboot
-bindsym $mod+Shift+w exec i3lock-fancy
+bindsym $mod+Shift+x exec i3lock-fancy
 
 # vim-like controlling
 bindsym $mod+h focus left
@@ -85,7 +88,19 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # take screenshot
-bindsym Print exec scrot --silent --quality 100 ~/personal/images/screenshots/screenshot_$(date +"IMG_%Y%m%d_%H%M%S").png
+bindsym Print exec scrot --silent --quality 100 ~/pictures/screenshots/screenshot_$(date +"IMG_%Y%m%d_%H%M%S").png
+
+
+# media controlling
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioStop exec playerctl stop
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+# volume controls
+#bindsym XF86RaiseVolume exec
+#bindsym XF86RaiseVolume exec 
+
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -94,12 +109,6 @@ mode "resize" {
 	bindsym j resize grow height 8 px or 8 ppt
 	bindsym k resize shrink height 8 px or 8 ppt
 	bindsym l resize grow width 8 px or 8 ppt
-
-	# same bindings, but for the arrow keys
-	bindsym Left resize shrink width 8 px or 8 ppt
-	bindsym Down resize grow height 8 px or 8 ppt
-	bindsym Up resize shrink height 8 px or 8 ppt
-	bindsym Right resize grow width 8 px or 8 ppt
 
 	# back to normal: Enter or Escape
 	bindsym Return mode "default"
@@ -110,9 +119,10 @@ bindsym $mod+r mode "resize"
 # launch applications
 mode "launch" {
 	# main apps
+	bindsym w exec "vivaldi-stable --incognito"
 	bindsym q exec qutebrowser
-	bindsym t exec telegram-desktop
-	bindsym z exec whatsapp-web-desktop
+	bindsym t exec telegram-desktop && mode "default"
+	bindsym z exec whatsie
 	bindsym s exec spotify
 	bindsym g exec steam
 
@@ -126,25 +136,53 @@ mode "launch" {
 }
 bindsym $mod+o mode "launch"
 
+# color variables
+set $default_bg		#000000
+set $inactive_bg	#000000
+set $urgent_bg 		#e53935
+
+set $default_text 	#ffffff
+set $inactive_text 	#666666
+set $urgent_text	#ffffff
+
+## window colors
+# class			border		backgr.		text		indicator	child_border
+client.focused          $urgent_bg	$urgent_bg	$default_text	$urgent_bg	$urgent_bg
+client.focused_inactive #333333		#5f676a 	#ffffff		#484e50		#5f676a
+client.unfocused        $inactive_bg	$inactive_bg	$inactive_text	$inactive_bg	#222222
+client.urgent           #2f343a		#900000		#ffffff		#900000		#900000
+client.placeholder      #000000		#0c0c0c		#ffffff		#000000		#0c0c0c
+client.background       #ffffff	
+
 # i3bar configuration
 bar {
 	status_command i3blocks
 	position top
-	font pango:monospace 10
-	separator_symbol "·"
+	font pango:Noto Sans 9
+	separator_symbol " "
 	colors {
-		background #222222
-		statusline #ffffff
-		separator #666666
+
+		background 	#000000
+		statusline 	#ffffff
+		separator 	#666666
+
+		## bar colors
+		# class			border		background	text
+		focused_workspace	$default_bg	$default_bg	$default_text
+		active_workspace	$default_bg	$default_bg	$default_text
+		inactive_workspace	$default_bg	$default_bg	$inactive_text
+		urgent_workspace	$urgent_bg	$urgent_bg	$urgent_text
+#		binding_mode
 	}
 }
 
 # assign programs to specific workspaces
+for_window [class="Vivaldi"] move to workspace 2
 for_window [class="qutebrowser"] move to workspace 2
 for_window [class="Telegram"] move to workspace 3
-for_window [class="Steam"] move to workspace 5
+for_window [class="Whatsie"] move to workspace 3
 for_window [class="Spotify"] move to workspace 4
-for_window [class="WhatsApp"] move to workspace 4
+for_window [class="Steam"] move to workspace 5
 
 hide_edge_borders both
 
