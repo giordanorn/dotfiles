@@ -1,15 +1,18 @@
 #!/usr/bin/env bash
 
 PLAYER=$BLOCK_INSTANCE
-LONG_OUTPUT=$(playerctl --player=$PLAYER metadata --format "{{ artist }} - {{ title }}")
-SHORT_OUTPUT=$(playerctl --player=$PLAYER status)
+LABEL=""
 
-if [[ $PLAYER -eq "spotify" ]]; then
-	LABEL=
-	COLOR="#84bd00"
-else
-	LABEL=
-	COLOR=""
+if [ $(playerctl status) != "No players found" ]; then
+	LONG_OUTPUT=$(playerctl --player=$PLAYER metadata --format "{{ artist }} - {{ title }}")
+	SHORT_OUTPUT=$(playerctl --player=$PLAYER status)
+	if [ "$PLAYER" == "spotify" ]; then
+		LABEL=
+		COLOR="#84bd00"
+	else
+		LABEL=
+		COLOR=""
+	fi
 fi
 
 echo "$LABEL $LONG_OUTPUT" # long text
