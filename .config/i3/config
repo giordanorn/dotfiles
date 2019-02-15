@@ -16,6 +16,7 @@ font pango:monospace 9
 
 # open a terminal instance
 bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+a exec --no-startup-id termite --exec ranger
 
 # kill and dmenu
 bindsym $mod+q kill
@@ -24,7 +25,7 @@ bindsym $mod+d exec dmenu_run
 # shutdown, reboot and lock-screen
 bindsym $mod+Shift+End exec shutdown now
 bindsym $mod+Shift+Home exec reboot
-bindsym $mod+Shift+x exec i3lock-fancy
+bindsym $mod+Shift+x exec i3lock --blur=0
 
 # vim-like controlling
 bindsym $mod+h focus left
@@ -93,12 +94,13 @@ bindsym $mod+Print exec escrotum -C
 bindsym $mod+Shift+Print exec --no-startup-id escrotum -Cs
 
 # media controlling
-bindsym XF86AudioPlay exec playerctl play-pause
-bindsym XF86AudioStop exec playerctl stop
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioPlay exec playerctl play-pause && pkill -SIGRTMIN+5 i3blocks
+bindsym XF86AudioStop exec playerctl stop && pkill -SIGRTMIN+5 i3blocks
+bindsym XF86AudioNext exec playerctl next && pkill -SIGRTMIN+5 i3blocks
+bindsym XF86AudioPrev exec playerctl previous && pkill -SIGRTMIN+5 i3blocks
 
 # volume controls @TODO
+bindsym XF86AudioMute exec amixer set Master toggle && pkill -SIGRTMIN+10 i3blocks
 #bindsym XF86RaiseVolume exec
 #bindsym XF86RaiseVolume exec 
 
@@ -121,7 +123,6 @@ bindsym $mod+r mode "resize"
 mode "launch" {
 	# main apps
 	bindsym w exec "vivaldi-stable --incognito"
-	bindsym q exec qutebrowser
 	bindsym t exec telegram-desktop && mode "default"
 	bindsym z exec whatsie
 	bindsym s exec spotify
@@ -188,5 +189,13 @@ for_window [class="Steam"] move to workspace 5
 
 hide_edge_borders both
 
+## startup applications
 # set keyboard layout
 exec --no-startup-id setxkbmap -model thinkpad60 -layout br -variant abnt2
+# set i3lock when close lid
+exec --no-startup-id xss-lock -- i3lock --blur=0
+# start notification daemon
+exec --no-startup-id dunst
+# start kalu
+exec --no-startup-id "sleep 5 && kalu"
+

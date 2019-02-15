@@ -1,51 +1,12 @@
-# i3blocks config file
-#
-# Please see man i3blocks for a complete reference!
-# The man page is also hosted at http://vivien.github.io/i3blocks
-#
-# List of valid properties:
-#
-# align
-# color
-# command
-# full_text
-# instance
-# interval
-# label
-# min_width
-# name
-# separator
-# separator_block_width
-# short_text
-# signal
-# urgent
-
-# Global properties
-#
-# The top properties below are applied to every block, but can be overridden.
-# Each block command defaults to the script name to avoid boilerplate.
 command=~/.config/i3blocks/scripts/$BLOCK_NAME
-separator_block_width=15
-markup=none
+separator_block_width=12
+markup=pango
 
-# Memory usage
-#
-# The type defaults to "mem" if the instance is not specified.
 [memory]
 label=
 separator=false
 interval=30
 
-#[memory]
-#label=SWAP
-#instance=swap
-#separator=false
-#interval=30
-
-# Disk usage
-# The directory defaults to $HOME if the instance is not specified.
-# The script may be called with a optional argument to set the alert
-# (defaults to 10 for 10%).
 [disk]
 label=
 instance=/root
@@ -56,60 +17,76 @@ interval=30
 label=
 instance=/home
 interval=30
-# Network interface monitoring
-#
-# If the instance is not specified, use the interface used for default route.
-# The address can be forced to IPv4 or IPv6 with -4 or -6 switches.
+
 [wifi]
-instance=wls1
+instance=wlp3s0
 label=
-interval=3
+interval=5
 separator=false
 
 [iface]
-#instance=wlan0
 label=
 color=#00FF00
-interval=1
+interval=5
 separator=false
 
 [downspeed]
 label=
-#instance=eth0
-interval=1
+interval=2
 separator=false
 color=#f22c40
 
 [upspeed]
 label=
-#instance=eth0
-interval=1
+interval=2
 color=#407ee7
 
-# CPU usage and Temperature
 [cpu_usage]
 label=
-interval=2
+interval=5
 separator=false
 
 [temperature]
 label=
 interval=5
 
+[mediaplayer]
+instance=spotify
+interval=once
+signal=5
+
 [volume]
 label=
 instance=Master
-#instance=PCM
 interval=once
 signal=10
 
+#[volume-pulseaudio]
+#interval=once
+#signal=1
+#MIXER=[determined automatically]
+#SCONTROL=[determined automatically]
+##exposed format variables: ${SYMB}, ${VOL}, ${INDEX}, ${NAME}
+#LONG_FORMAT="${SYMB} ${VOL}% [${INDEX}:${NAME}]"
+#SHORT_FORMAT="${SYMB} ${VOL}% [${INDEX}]"
+#AUDIO_HIGH_SYMBOL='  '
+#AUDIO_MED_THRESH=50
+#AUDIO_MED_SYMBOL='  '
+#AUDIO_LOW_THRESH=0
+#AUDIO_LOW_SYMBOL='  '
+#AUDIO_DELTA=5
+#DEFAULT_COLOR="#ffffff"
+#MUTED_COLOR="#a0a0a0"
+#USE_ALSA_NAME=0
+#USE_DESCRIPTION=0
+## SUBSCRIBE=1 requires interval=persist and always uses LONG_FORMAT
+#SUBSCRIBE=0
 #[load_average]
 #interval=10
 
 [battery]
-interval=1
+interval=5
 
-# Date and Time
 [date]
 label=
 command=date '+%a %d %b'
@@ -120,35 +97,3 @@ separator=false
 label=
 command=date '+%H:%M'
 interval=60
-
-# Generic media player support
-#
-# This displays "ARTIST - SONG" if a music is playing.
-# Supported players are: spotify, vlc, audacious, xmms2, mplayer, and others.
-#[mediaplayer]
-#instance=spotify
-#interval=5
-#signal=10
-
-# OpenVPN support
-#
-# Support multiple VPN, with colors.
-#[openvpn]
-#interval=20
-
-# Key indicators
-#
-# Add the following bindings to i3 config file:
-#
-# bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
-# bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
-#[keyindicator]
-#instance=CAPS
-#interval=once
-#signal=11
-
-#[keyindicator]
-#instance=NUM
-#interval=once
-#signal=11
-
