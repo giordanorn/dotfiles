@@ -1,21 +1,23 @@
 #!/usr/bin/bash
 
 # status percent number (less equal than)
-critical_percent=10
-low_percent=20
-medium_percent=40
+percent_crit=10
+percent_low=25
+percent_avg=55
+percent_good=75
 
 # colors
-red="#FF0000"
-orange="#FFA500"
-yellow="#FFFF00"
-green="#00FF00"
+color_crit="#FF0000"
+color_low="#FFA500"
+color_avg="#FFFF00"
+color_good=""		#I dont like to color this
+color_full="#00FF00"
 
 # icons for the label (FontAwesome)
-bat_empty=""
+bat_crit=""
 bat_low=""
-bat_medium=""
-bat_avg=""
+bat_avg=""
+bat_good=""
 bat_full=""
 charging=""
 loading=""
@@ -48,26 +50,30 @@ if [[ -n $(echo $output | grep Charging) ]]; then
 	label=$charging
 	estimated=`estimated_time`
 	if [[ $percent -eq 100 ]]; then
-		color=$green
+		color=$color_full
 	fi
 else
 	if [[ -n $(echo $output | grep Unknown) ]]; then
 		# disabled due to acpi reporting Unknown behavior in some actually known momments
+		color=$color_full
 		label=$charging
-		color=$green
 	elif [[ -n $(echo $output | grep Full) ]]; then
+		color=$color_full
 		label=$charging
-		color=$green
-	elif [[ $percent -lt $critical_percent ]]; then
-		color=$red
-		label=$bat_empty
-	elif [[ $percent -lt $low_percent ]]; then
-		color=$orange
-		label=$bat_medium
-	elif [[ $percent -lt $medium_percent ]]; then
-		color=$yellow
+	elif [[ $percent -le $percent_crit ]]; then
+		color=$color_crit
+		label=$bat_crit
+	elif [[ $percent -le $percent_low ]]; then
+		color=$color_low
+		label=$bat_low
+	elif [[ $percent -le $percent_avg ]]; then
+		color=$color_avg
 		label=$bat_avg
+	elif [[ $percent -le $percent_good ]]; then
+		color=$color_good
+		label=$bat_good
 	else
+		#color=$color_full
 		label=$bat_full
 	fi
 
@@ -78,5 +84,5 @@ fi
 
 
 echo "$label $percent%$estimated"	# full text
-echo "$label $percent%$estimated"	# short text
+echo "$label $percent%"			# short text
 echo "$color"				# display color
