@@ -101,8 +101,8 @@ bindsym XF86AudioPrev exec playerctl previous && pkill -SIGRTMIN+5 i3blocks
 
 # volume controlling
 bindsym XF86AudioMute exec "amixer set Master toggle && amixer set Speaker unmute && amixer set Headphone unmute && pkill -SIGRTMIN+10 i3blocks"
-bindsym XF86AudioRaiseVolume exec "amixer -q -D default sset Master 5%+ unmute && pkill -SIGRTMIN+10 i3blocks"
-bindsym XF86AudioLowerVolume exec "amixer -q -D default sset Master 5%- unmute && pkill -SIGRTMIN+10 i3blocks"
+bindsym XF86AudioRaiseVolume exec "amixer set Master 5%+ unmute && pkill -SIGRTMIN+10 i3blocks"
+bindsym XF86AudioLowerVolume exec "amixer set Master 5%- unmute && pkill -SIGRTMIN+10 i3blocks"
 
 
 # resize window (you can also use the mouse for that)
@@ -126,7 +126,7 @@ mode "launch" {
 	bindsym t exec telegram-desktop
 	bindsym z exec whatsie
 	bindsym s exec spotify
-#	bindsym g exec steam
+	bindsym g exec steam
 
 	# utils
 	bindsym e exec pcmanfm
@@ -157,7 +157,10 @@ client.urgent           #2f343a		#900000		#ffffff		#900000		#900000
 client.placeholder      #000000		#0c0c0c		#ffffff		#000000		#0c0c0c
 client.background       #ffffff	
 
+
 # i3bar configuration
+bindsym $mod+Tab bar mode invisible
+bindsym $mod+Shift+Tab bar mode dock
 bar {
 	status_command i3blocks
 	position top
@@ -195,7 +198,7 @@ hide_edge_borders both
 # set keyboard layout
 exec --no-startup-id setxkbmap -model thinkpad60 -layout br -variant abnt2
 # set i3lock when close lid
-exec --no-startup-id xss-lock -- i3lock --blur=0
+exec --no-startup-id xss-lock -- "pgrep -x i3lock || i3lock --blur=0"
 # start notification daemon
 exec --no-startup-id dunst
 # start kalu
