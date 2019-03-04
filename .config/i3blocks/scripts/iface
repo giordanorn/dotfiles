@@ -52,18 +52,13 @@ esac
 
 # if no interface is found, use the first device with a global scope
 IPADDR=$(ip addr show $IF | perl -n -e "/$AF ([^\/]+).* scope global/ && print \$1 and exit")
-
-case $BLOCK_BUTTON in
-  3) echo -n "$IPADDR" | xclip -q -se c ;;
-esac
-
-SEPARATOR=""
 SSID=$(iwgetid -r)
 
-if [[ $SSID != "" ]]; then
-	SEPARATOR=" at "
-fi
-#------------------------------------------------------------------------
+case $BLOCK_BUTTON in
+  1) notify-send "Connected at <i>$SSID</i>. Current ip address $IPADDR" ;;
+esac
 
-echo "$IPADDR$SEPARATOR$SSID" # full text
-#echo "$IPADDR" # short text
+
+# I don't want to show full text, if you do, uncomment the above line 
+#[[ $SSID != "" ]] && echo "$IPADDR at $SSID" # full text
+echo "$IPADDR" # short text
