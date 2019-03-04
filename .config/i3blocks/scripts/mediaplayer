@@ -13,9 +13,10 @@ if [ $(playerctl status) != "No players found" ]; then
 		LABEL=
 		COLOR=""
 	fi
+
+	echo "$LABEL $LONG_OUTPUT" # long text
+	echo "$LABEL $SHORT_OUTPUT" # short text
+	echo $COLOR
+	echo ""
 fi
 
-echo "$LABEL $LONG_OUTPUT" # long text
-echo "$LABEL $SHORT_OUTPUT" # short text
-echo $COLOR
-echo ""
