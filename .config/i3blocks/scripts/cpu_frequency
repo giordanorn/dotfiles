@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# @TODO in terminal runs fine, but in i3block show wrong results
+#cat /proc/cpuinfo | awk '/^cpu MHz/ { print (int($4 / 100) / 10) " GHz" }'
+lscpu | awk '/^CPU MHz/ { print (int($3 / 100) / 10) " GHz" }'
