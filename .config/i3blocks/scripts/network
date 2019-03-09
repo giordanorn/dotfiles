@@ -55,7 +55,7 @@ IPADDR=$(ip addr show $IF | perl -n -e "/$AF ([^\/]+).* scope global/ && print \
 SSID=$(iwgetid -r)
 
 case $BLOCK_BUTTON in
-  1) notify-send "Connected at <i>$SSID</i>. Current ip address $IPADDR" ;;
+  1) notify-send "$(echo -e 'Connected at <i>'$SSID'</i>\nCurrent IP address '$IPADDR)" ;;
 esac
 
 
