@@ -24,3 +24,4 @@ export BROWSER="firefox"
 export READER="evince"
 export TERMINAL="st"
 
+[ -f "$HOME/.aliases" ] && source "$HOME/.aliases"
