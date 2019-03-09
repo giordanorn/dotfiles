@@ -1,3 +1,5 @@
+#!/bin/zsh
+
 autoload -Uz compinit promptinit
 compinit
 promptinit
@@ -16,3 +18,9 @@ zstyle ':completion::complete:*' gain-privileges 1
 
 # bind emacs-like shorcuts
 bindkey -e
+
+export EDITOR="vim"
+export BROWSER="firefox"
+export READER="evince"
+export TERMINAL="st"
+
