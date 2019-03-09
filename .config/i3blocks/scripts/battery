@@ -83,6 +83,6 @@ else
 fi
 
 
-echo "$label $percent%$estimated"	# full text
+echo "$label $percent% $estimated"	# full text
 echo "$label $percent%"			# short text
 echo "$color"				# display color
