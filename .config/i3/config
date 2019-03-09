@@ -1,18 +1,26 @@
-# i3 configuration file
+###############################
+#    i3 configuration file    #
+###############################
 
 set $screenshots_folder "~/pictures/screenshots"
 
 for_window [class="^.*"] border pixel 2
 
+hide_edge_borders both
+
 smart_gaps on
 gaps inner 8
 gaps outer 4
 
+font pango: Open Sans Bold 9
+
+##########################
+#        BINDINGS        #
+##########################
+
+# set modifier key to Mod4 (Super / Windows Key)
 set $mod Mod4
-
 floating_modifier $mod
-
-font pango:monospace 9
 
 # open a terminal instance
 bindsym $mod+Return exec st
@@ -36,6 +44,12 @@ bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
+
+# Rezising without entering resize mode
+bindsym $mod+Control+h resize shrink width 4 px or 4 ppt
+bindsym $mod+Control+j resize grow height 4 px or 4 ppt
+bindsym $mod+Control+k resize shrink height 4 px or 4 ppt
+bindsym $mod+Control+l resize grow width 4 px or 4 ppt
 
 # split in horizontal and vertical
 bindsym $mod+c split h
@@ -108,10 +122,10 @@ bindsym XF86AudioLowerVolume exec "amixer set Master 5%- unmute && pkill -SIGRTM
 # resize window (you can also use the mouse for that)
 mode "resize" {
 	# These bindings trigger as soon as you enter the resize mode
-	bindsym h resize shrink width 8 px or 8 ppt
-	bindsym j resize grow height 8 px or 8 ppt
-	bindsym k resize shrink height 8 px or 8 ppt
-	bindsym l resize grow width 8 px or 8 ppt
+	bindsym h resize shrink width 50 px or 50 ppt
+	bindsym j resize grow height 50 px or 50 ppt
+	bindsym k resize shrink height 50 px or 50 ppt
+	bindsym l resize grow width 50 px or 50 ppt
 
 	# back to normal: Enter or Escape
 	bindsym Return mode "default"
@@ -122,85 +136,103 @@ bindsym $mod+r mode "resize"
 # launch applications
 mode "launch" {
 	# main apps
-	bindsym w exec "vivaldi-stable --incognito"
-	bindsym t exec telegram-desktop
-	bindsym z exec whatsie
-	bindsym s exec spotify
-	bindsym g exec steam
+	bindsym w exec notify-send "Launching Firefox Web Browser"; exec firefox; mode "default"
+	bindsym t exec notify-send "Launching Telegram Desktop"; exec telegram-desktop; mode "default"
+	bindsym z exec notify-send "Launching Whatsapp Desktop"; exec whatsie; mode "default"
+	bindsym s exec notify-send "Launching Spotify"; exec spotify; mode "default"
+	bindsym g exec notify-send "Launching Steam"; exec steam; mode "default"
 
 	# utils
-	bindsym e exec pcmanfm
-#	bindsym b exec blueman-applet
-	bindsym n exec nm-applet
-	bindsym v exec pavucontrol
+	bindsym o exec notify-send "Launching vim on i3 config file"; exec st -e vim ~/.config/i3/config; mode "default"
+	bindsym e exec pcmanfm $(xdg-user-dir DESKTOP); mode "default"
+	bindsym c exec xawtv -c /dev/video0; mode "default"
+	bindsym l exec lxappearance; mode "default"
+	bindsym i exec notify-send "Launching Gimp Image Editor"; exec gimp; mode "default"
+	bindsym m exec notify-send "Launching Thunderbird"; exec thunderbird; mode "default"
+	#bindsym b exec blueman-applet
+	bindsym n exec notify-send "Launghing NetworkManager Applet"; exec nm-applet; mode "default"
+	bindsym v exec notify-send "Launching Volume Control (<i>pavucontrol</i>)"; exec pavucontrol; mode "default"
 
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
 }
 bindsym $mod+o mode "launch"
 
-# color variables
-set $default_bg		#000000
-set $inactive_bg	#000000
-set $urgent_bg 		#e53935
 
-set $default_text 	#ffffff
-set $inactive_text 	#666666
-set $urgent_text	#ffffff
+########################
+#        COLORS        #
+########################
 
-## window colors
-# class			border		backgr.		text		indicator	child_border
-client.focused          $urgent_bg	$urgent_bg	$default_text	$urgent_bg	$urgent_bg
-client.focused_inactive #333333		#5f676a 	#ffffff		#484e50		#5f676a
-client.unfocused        $inactive_bg	$inactive_bg	$inactive_text	$inactive_bg	#222222
-client.urgent           #2f343a		#900000		#ffffff		#900000		#900000
-client.placeholder      #000000		#0c0c0c		#ffffff		#000000		#0c0c0c
-client.background       #ffffff	
+##  constant colors
+set $DEFAULT_BG		#282828
+set $INACTIVE_BG	#282828
+set $URGENT_BG 		#e53935
 
+set $DEFAULT_TEXT 	#ffffff
+set $INACTIVE_TEXT 	#808080
+set $URGENT_TEXT	#ffffff
 
-# i3bar configuration
-bindsym $mod+Tab bar mode invisible
-bindsym $mod+Shift+Tab bar mode dock
+##  window colors
+# class					border			backgr.			text			indicator		child_border
+client.focused          $URGENT_BG		$URGENT_BG		$DEFAULT_TEXT	$URGENT_BG		$URGENT_BG
+client.focused_inactive #333333			#5f676a 		#ffffff			#484e50			#5f676a
+client.unfocused        $INACTIVE_BG	$INACTIVE_BG	$INACTIVE_TEXT	$INACTIVE_BG	#222222
+client.urgent           #2f343a			#900000			#ffffff			#900000			#900000
+client.placeholder      #000000			#0c0c0c			#ffffff			#000000			#0c0c0c
+client.background       $DEFAULT_BG
+
+## bar colors
 bar {
-	status_command i3blocks
-	position top
-	font pango:Noto Sans 9
-	separator_symbol " "
 	colors {
-
-		background 	#000000
-		statusline 	#ffffff
-		separator 	#666666
+		background 	$DEFAULT_BG
+		statusline 	$DEFAULT_TEXT
+		separator 	$DEFAULT_TEXT
 
 		## bar colors
-		# class			border		background	text
-		focused_workspace	$default_bg	$default_bg	$default_text
-		active_workspace	$default_bg	$default_bg	$default_text
-		inactive_workspace	$default_bg	$default_bg	$inactive_text
-		urgent_workspace	$urgent_bg	$urgent_bg	$urgent_text
-#		binding_mode
+		# class				border		background	text
+		focused_workspace	$DEFAULT_BG	$DEFAULT_BG	$DEFAULT_TEXT
+		active_workspace	$DEFAULT_BG	$DEFAULT_BG	$DEFAULT_TEXT
+		inactive_workspace	$DEFAULT_BG	$DEFAULT_BG	$INACTIVE_TEXT
+		urgent_workspace	$URGENT_BG	$URGENT_BG	$URGENT_TEXT
+		#binding_mode
 	}
+
+######################################
+#        i3bar CONFIGURATION         #
+######################################
+
+# general configuration
+	status_command i3blocks
+	position top
+	separator_symbol " "
 }
 
-# assign programs to specific workspaces
-for_window [class="Vivaldi"] move to workspace 2
-for_window [class="qutebrowser"] move to workspace 2
+# show/hide bar
+bindsym $mod+Tab bar mode invisible
+bindsym $mod+Shift+Tab bar mode dock
+
+
+####################################
+#        WINDOW ASSIGNMENTS        #
+####################################
+
+# assign to workspaces
+for_window [class="GitKraken"] move to workspace 1
+for_window [class="Firefox"] move to workspace 2
 for_window [class="Telegram"] move to workspace 3
 for_window [class="Whatsie"] move to workspace 3
 for_window [class="Spotify"] move to workspace 4
 for_window [class="Steam"] move to workspace 5
 
+# force float window
 for_window [class="Pavucontrol"] floating enable
+for_window [class="xawtv"] floating enable
 
-hide_edge_borders both
+######################################
+#        STARTUP APPLICATIONS        #
+######################################
 
-## startup applications
-# set keyboard layout
-exec --no-startup-id setxkbmap -model thinkpad60 -layout br -variant abnt2
 # set i3lock when close lid
-exec --no-startup-id xss-lock -- "pgrep -x i3lock || i3lock --blur=0"
+exec --no-startup-id xss-lock -- i3lock --blur=0
 # start notification daemon
 exec --no-startup-id dunst
-# start kalu
-exec --no-startup-id "sleep 5 && sudo kalu"
-
