@@ -118,6 +118,8 @@ bindsym XF86AudioMute exec "amixer set Master toggle && amixer set Speaker unmut
 bindsym XF86AudioRaiseVolume exec "amixer set Master 5%+ unmute && pkill -SIGRTMIN+10 i3blocks"
 bindsym XF86AudioLowerVolume exec "amixer set Master 5%- unmute && pkill -SIGRTMIN+10 i3blocks"
 
+# clean clipboard
+bindsym $mod+Shift+Insert exec xclip -i /dev/null
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
