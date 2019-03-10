@@ -145,8 +145,7 @@ mode "launch" {
 	bindsym g exec notify-send "Launching Steam"; exec steam; mode "default"
 
 	# utils
-	bindsym o exec notify-send "Launching vim on i3 config file"; exec st -e vim ~/.config/i3/config; mode "default"
-	bindsym e exec pcmanfm $(xdg-user-dir DESKTOP); mode "default"
+	bindsym e exec pcmanfm -n $(xdg-user-dir DESKTOP); mode "default"
 	bindsym c exec xawtv -c /dev/video0; mode "default"
 	bindsym l exec lxappearance; mode "default"
 	bindsym i exec notify-send "Launching Gimp Image Editor"; exec gimp; mode "default"
