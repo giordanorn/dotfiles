@@ -170,9 +170,9 @@ set $DEFAULT_BG		#282828
 set $INACTIVE_BG	#282828
 set $URGENT_BG 		#e53935
 
-set $DEFAULT_TEXT 	#ffffff
+set $DEFAULT_TEXT 	#eeeeee
 set $INACTIVE_TEXT 	#808080
-set $URGENT_TEXT	#ffffff
+set $URGENT_TEXT	#eeeeee
 
 ##  window colors
 # class					border			backgr.			text			indicator		child_border
