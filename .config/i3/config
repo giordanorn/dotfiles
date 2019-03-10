@@ -31,8 +31,8 @@ bindsym $mod+q kill
 bindsym $mod+d exec dmenu_run
 
 # shutdown, reboot and lock-screen
-bindsym $mod+Shift+End exec shutdown now
-bindsym $mod+Shift+Home exec reboot
+bindsym $mod+Shift+End exec confirm "Do you want to shutdown now?" "exec shutdown now"
+bindsym $mod+Shift+Home exec confirm "Do you want to reboot your machine?" "exec reboot"
 bindsym $mod+Shift+x exec i3lock --blur=0
 
 # vim-like controlling
@@ -100,7 +100,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec confirm "Do you want to end your session?" "exec i3-msg exit"
 
 # take screenshot
 bindsym Print exec scrot --silent --quality 100 ~/pictures/screenshots/screenshot_$(date +"IMG_%Y%m%d_%H%M%S").png
