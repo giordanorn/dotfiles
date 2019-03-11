@@ -19,6 +19,7 @@ font pango: Open Sans Bold 9
 # Super / Windows Key
 set $mod 			Mod4 
 
+set $SCRIPTS_FOLDER		$HOME/scripts
 set $SCREENSHOTS_FOLDER		$(xdg-user-dir PICTURES || echo $HOME)/screenshots
 
 ##########################
@@ -143,29 +144,7 @@ mode "resize" {
 bindsym $mod+r 			mode "resize"
 
 # launch applications
-mode "launch" {
-	# main apps
-	bindsym w exec notify-send "Launching Firefox Web Browser"; exec firefox; mode "default"
-	bindsym t exec notify-send "Launching Telegram Desktop"; exec telegram-desktop; mode "default"
-	bindsym z exec notify-send "Launching Whatsapp Desktop"; exec whatsie; mode "default"
-	bindsym s exec notify-send "Launching Spotify"; exec spotify; mode "default"
-	bindsym g exec notify-send "Launching Steam"; exec steam; mode "default"
-
-	# utils
-	bindsym e exec pcmanfm -n $(xdg-user-dir DESKTOP); mode "default"
-	bindsym c exec xawtv -c /dev/video0; mode "default"
-	bindsym l exec lxappearance; mode "default"
-	bindsym i exec notify-send "Launching Gimp Image Editor"; exec gimp; mode "default"
-	bindsym m exec notify-send "Launching Thunderbird"; exec thunderbird; mode "default"
-	#bindsym b exec blueman-applet
-	bindsym n exec notify-send "Launghing NetworkManager Applet"; exec nm-applet; mode "default"
-	bindsym v exec notify-send "Launching Volume Control (<i>pavucontrol</i>)"; exec pavucontrol; mode "default"
-
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
-}
-bindsym $mod+o mode "launch"
-
+bindsym $mod+o			exec launch $SCRIPTS_FOLDER/launch.conf
 
 ########################
 #        COLORS        #

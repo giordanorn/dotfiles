@@ -1,0 +1,18 @@
+#!/bin/sh
+
+OPTION=$(cat $1 | dmenu -i)
+
+case $OPTION in
+	"Firefox")			exec notify-send "Launching Firefox Web Browser" ; exec firefox ;;
+	"Telegram")			exec notify-send "Launching Telegram Desktop" ; exec telegram-desktop ;;
+	"WhatsApp")			exec notify-send "Launching Whatsapp Desktop" ; exec whatsie ;;
+	"Spotify")			exec notify-send "Launching Spotify" ; exec spotify ;;
+	"Steam")			exec notify-send "Launching Steam" ; exec steam ;;
+	"PCManFM File Manager")		exec pcmanfm -n $(xdg-user-dir DESKTOP) ;;
+	"Camera")			exec xawtv -c /dev/video0 ;;
+	"Appearance")			exec lxappearance ;;
+	"Gimp Image Editor")		exec notify-send "Launching Gimp Image Editor" ; exec gimp;;
+	"Thunderbird Mail")		exec notify-send "Launching Thunderbird" ; exec thunderbird ;;
+	"Network Manager")		exec notify-send "Launghing NetworkManager Applet" ; exec nm-applet ;;
+	"Pavucontrol Volume Control")	exec notify-send "Launching Volume Control (<i>pavucontrol</i>)" ; exec pavucontrol ;;
+esac
