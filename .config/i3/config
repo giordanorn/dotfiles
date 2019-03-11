@@ -1,8 +1,6 @@
-###############################
-#    i3 configuration file    #
-###############################
-
-set $screenshots_folder "~/pictures/screenshots"
+#########################################
+##        i3 configuration file        ##
+#########################################
 
 for_window [class="^.*"] border pixel 2
 
@@ -14,93 +12,100 @@ gaps outer 4
 
 font pango: Open Sans Bold 9
 
+###########################
+#        CONSTANTS        #
+###########################
+
+# Super / Windows Key
+set $mod 			Mod4 
+
+
 ##########################
 #        BINDINGS        #
 ##########################
 
-# set modifier key to Mod4 (Super / Windows Key)
-set $mod Mod4
+# set modifier key to Mod4
 floating_modifier $mod
 
-# open a terminal instance
-bindsym $mod+Return exec st
-bindsym $mod+a exec --no-startup-id st -e ranger
+# open a terminal instance and ranger
+bindsym $mod+Return		exec st
+bindsym $mod+a			exec --no-startup-id st -e ranger
 
 # kill and dmenu
-bindsym $mod+q kill
-bindsym $mod+d exec dmenu_run
+bindsym $mod+q			kill
+bindsym $mod+d			exec dmenu_run
 
 # shutdown, reboot and lock-screen
-bindsym $mod+Shift+End exec confirm "Do you want to shutdown now?" "exec shutdown now"
-bindsym $mod+Shift+Home exec confirm "Do you want to reboot your machine?" "exec reboot"
-bindsym $mod+Shift+x exec i3lock --blur=0
+bindsym $mod+Shift+End		exec confirm "Do you want to shutdown now?" && exec shutdown now
+bindsym $mod+Shift+Home		exec confirm "Do you want to reboot your machine?" && exec reboot
+bindsym $mod+Shift+x		exec i3lock --blur=0
 
 # vim-like controlling
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
+bindsym $mod+h			focus left
+bindsym $mod+j			focus down
+bindsym $mod+k			focus up
+bindsym $mod+l			focus right
+bindsym $mod+Shift+h		move left
+bindsym $mod+Shift+j		move down
+bindsym $mod+Shift+k		move up
+bindsym $mod+Shift+l		move right
 
 # Rezising without entering resize mode
-bindsym $mod+Control+h resize shrink width 4 px or 4 ppt
-bindsym $mod+Control+j resize grow height 4 px or 4 ppt
-bindsym $mod+Control+k resize shrink height 4 px or 4 ppt
-bindsym $mod+Control+l resize grow width 4 px or 4 ppt
+bindsym $mod+Control+h		resize shrink width 4 px or 4 ppt
+bindsym $mod+Control+j 		resize grow height 4 px or 4 ppt
+bindsym $mod+Control+k 		resize shrink height 4 px or 4 ppt
+bindsym $mod+Control+l 		resize grow width 4 px or 4 ppt
 
 # split in horizontal and vertical
-bindsym $mod+c split h
-bindsym $mod+v split v
+bindsym $mod+c 			split h
+bindsym $mod+v 			split v
 
 # enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
+bindsym $mod+f 			fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+s 			layout stacking
+bindsym $mod+w 			layout tabbed
+bindsym $mod+e 			layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+space 	floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+bindsym $mod+space 		focus mode_toggle
 
 # switch to workspace
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+bindsym $mod+1 			workspace 1
+bindsym $mod+2 			workspace 2
+bindsym $mod+3 			workspace 3
+bindsym $mod+4 			workspace 4
+bindsym $mod+5 			workspace 5
+bindsym $mod+6 			workspace 6
+bindsym $mod+7 			workspace 7
+bindsym $mod+8 			workspace 8
+bindsym $mod+9 			workspace 9
+bindsym $mod+0 			workspace 10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+Shift+1 		move container to workspace 1
+bindsym $mod+Shift+2 		move container to workspace 2
+bindsym $mod+Shift+3 		move container to workspace 3
+bindsym $mod+Shift+4 		move container to workspace 4
+bindsym $mod+Shift+5 		move container to workspace 5
+bindsym $mod+Shift+6 		move container to workspace 6
+bindsym $mod+Shift+7 		move container to workspace 7
+bindsym $mod+Shift+8 		move container to workspace 8
+bindsym $mod+Shift+9 		move container to workspace 9
+bindsym $mod+Shift+0 		move container to workspace 10
 
 # reload the configuration file
-bindsym $mod+Shift+c reload
+bindsym $mod+Shift+c 		reload
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
+bindsym $mod+Shift+r 		restart
 
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec confirm "Do you want to end your session?" "exec i3-msg exit"
+bindsym $mod+Shift+e 		exec confirm "Do you want to end your session?"	&& exec i3-msg exit
 
 # take screenshot
 bindsym Print exec scrot --silent --quality 100 ~/pictures/screenshots/screenshot_$(date +"IMG_%Y%m%d_%H%M%S").png
@@ -108,32 +113,32 @@ bindsym $mod+Print exec escrotum -C
 bindsym $mod+Shift+Print exec --no-startup-id escrotum -Cs
 
 # media controlling
-bindsym XF86AudioPlay exec playerctl play-pause && pkill -SIGRTMIN+5 i3blocks
-bindsym XF86AudioStop exec playerctl stop && pkill -SIGRTMIN+5 i3blocks
-bindsym XF86AudioNext exec playerctl next && pkill -SIGRTMIN+5 i3blocks
-bindsym XF86AudioPrev exec playerctl previous && pkill -SIGRTMIN+5 i3blocks
+bindsym XF86AudioPlay		exec playerctl play-pause ; exec pkill -SIGRTMIN+5 i3blocks
+bindsym XF86AudioStop		exec playerctl stop ; exec pkill -SIGRTMIN+5 i3blocks
+bindsym XF86AudioNext		exec playerctl next ; exec pkill -SIGRTMIN+5 i3blocks
+bindsym XF86AudioPrev		exec playerctl previous	; exec pkill -SIGRTMIN+5 i3blocks
 
 # volume controlling
-bindsym XF86AudioMute exec "amixer set Master toggle && amixer set Speaker unmute && amixer set Headphone unmute && pkill -SIGRTMIN+10 i3blocks"
-bindsym XF86AudioRaiseVolume exec "amixer set Master 5%+ unmute && pkill -SIGRTMIN+10 i3blocks"
-bindsym XF86AudioLowerVolume exec "amixer set Master 5%- unmute && pkill -SIGRTMIN+10 i3blocks"
+bindsym XF86AudioMute		exec amixer set Master toggle ; exec amixer set Speaker unmute ; exec amixer set Headphone unmute ; exec pkill -SIGRTMIN+10 i3blocks
+bindsym XF86AudioRaiseVolume	exec amixer set Master 5%+ unmute ; exec pkill -SIGRTMIN+10 i3blocks
+bindsym XF86AudioLowerVolume	exec amixer set Master 5%- unmute ; exec pkill -SIGRTMIN+10 i3blocks
 
 # clean clipboard
-bindsym $mod+Shift+Insert exec xclip -i /dev/null
+bindsym $mod+Shift+Insert	exec xclip -i /dev/null
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
 	# These bindings trigger as soon as you enter the resize mode
-	bindsym h resize shrink width 50 px or 50 ppt
-	bindsym j resize grow height 50 px or 50 ppt
-	bindsym k resize shrink height 50 px or 50 ppt
-	bindsym l resize grow width 50 px or 50 ppt
+	bindsym h resize 		shrink width 50 px or 50 ppt
+	bindsym j resize 		grow height 50 px or 50 ppt
+	bindsym k resize 		shrink height 50 px or 50 ppt
+	bindsym l resize 		grow width 50 px or 50 ppt
 
 	# back to normal: Enter or Escape
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
+	bindsym Return 			mode "default"
+	bindsym Escape 			mode "default"
 }
-bindsym $mod+r mode "resize"
+bindsym $mod+r 			mode "resize"
 
 # launch applications
 mode "launch" {
@@ -174,12 +179,12 @@ set $INACTIVE_TEXT 	#808080
 set $URGENT_TEXT	#eeeeee
 
 ##  window colors
-# class					border			backgr.			text			indicator		child_border
+# class			border			backgr.			text		indicator		child_border
 client.focused          $URGENT_BG		$URGENT_BG		$DEFAULT_TEXT	$URGENT_BG		$URGENT_BG
-client.focused_inactive #333333			#5f676a 		#ffffff			#484e50			#5f676a
-client.unfocused        $INACTIVE_BG	$INACTIVE_BG	$INACTIVE_TEXT	$INACTIVE_BG	#222222
-client.urgent           #2f343a			#900000			#ffffff			#900000			#900000
-client.placeholder      #000000			#0c0c0c			#ffffff			#000000			#0c0c0c
+client.focused_inactive #333333			#5f676a 		#ffffff		#484e50			#5f676a
+client.unfocused        $INACTIVE_BG		$INACTIVE_BG		$INACTIVE_TEXT	$INACTIVE_BG		#222222
+client.urgent           #2f343a			#900000			#ffffff		#900000			#900000
+client.placeholder      #000000			#0c0c0c			#ffffff		#000000			#0c0c0c
 client.background       $DEFAULT_BG
 
 ## bar colors
@@ -190,7 +195,7 @@ bar {
 		separator 	$DEFAULT_TEXT
 
 		## bar colors
-		# class				border		background	text
+		# class			border		background	text
 		focused_workspace	$DEFAULT_BG	$DEFAULT_BG	$DEFAULT_TEXT
 		active_workspace	$DEFAULT_BG	$DEFAULT_BG	$DEFAULT_TEXT
 		inactive_workspace	$DEFAULT_BG	$DEFAULT_BG	$INACTIVE_TEXT
@@ -209,8 +214,8 @@ bar {
 }
 
 # show/hide bar
-bindsym $mod+Tab bar mode invisible
-bindsym $mod+Shift+Tab bar mode dock
+bindsym $mod+Tab 		bar mode invisible
+bindsym $mod+Shift+Tab		bar mode dock
 
 
 ####################################
@@ -218,23 +223,23 @@ bindsym $mod+Shift+Tab bar mode dock
 ####################################
 
 # assign to workspaces
-for_window [class="GitKraken"] move to workspace 1
-for_window [class="Firefox"] move to workspace 2
-for_window [class="Telegram"] move to workspace 3
-for_window [class="Whatsie"] move to workspace 3
-for_window [class="Spotify"] move to workspace 4
-for_window [class="Steam"] move to workspace 5
-for_window [class="Thunderbird"] move to workspace 10
+for_window [class="GitKraken"]		move to workspace 1
+for_window [class="Firefox"]		move to workspace 2
+for_window [class="Telegram"]		move to workspace 3
+for_window [class="Whatsie"]		move to workspace 3
+for_window [class="Spotify"]		move to workspace 4
+for_window [class="Steam"] 		move to workspace 5
+for_window [class="Thunderbird"] 	move to workspace 10
 
 # force float window
-for_window [class="Pavucontrol"] floating enable
-for_window [class="xawtv"] floating enable
+for_window [class="Pavucontrol"] 	floating enable
+for_window [class="xawtv"] 		floating enable
 
 ######################################
 #        STARTUP APPLICATIONS        #
 ######################################
 
 # set i3lock when close lid
-exec --no-startup-id xss-lock -- i3lock --blur=0
+exec --no-startup-id 			xss-lock -- i3lock --blur=0
 # start notification daemon
-exec --no-startup-id dunst
+exec --no-startup-id 			dunst
