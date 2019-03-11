@@ -34,6 +34,7 @@ bindsym $mod+a			exec --no-startup-id st -e ranger
 # kill and dmenu
 bindsym $mod+q			kill
 bindsym $mod+d			exec dmenu_run
+bindsym $mod+Shift+d		exec i3-dmenu-desktop
 
 # shutdown, reboot and lock-screen
 bindsym $mod+Shift+End		exec confirm "Do you want to shutdown now?" && exec shutdown now
