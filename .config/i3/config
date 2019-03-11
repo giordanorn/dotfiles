@@ -173,7 +173,7 @@ bindsym $mod+o mode "launch"
 ##  constant colors
 set $DEFAULT_BG		#282828
 set $INACTIVE_BG	#282828
-set $URGENT_BG 		#e53935
+set $URGENT_BG 		#f22c40
 
 set $DEFAULT_TEXT 	#eeeeee
 set $INACTIVE_TEXT 	#808080
