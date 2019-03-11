@@ -19,6 +19,7 @@ font pango: Open Sans Bold 9
 # Super / Windows Key
 set $mod 			Mod4 
 
+set $SCREENSHOTS_FOLDER		$(xdg-user-dir PICTURES || echo $HOME)/screenshots
 
 ##########################
 #        BINDINGS        #
@@ -109,9 +110,9 @@ bindsym $mod+Shift+r 		restart
 bindsym $mod+Shift+e 		exec confirm "Do you want to end your session?"	&& exec i3-msg exit
 
 # take screenshot
-bindsym Print exec scrot --silent --quality 100 ~/pictures/screenshots/screenshot_$(date +"IMG_%Y%m%d_%H%M%S").png
-bindsym $mod+Print exec escrotum -C
-bindsym $mod+Shift+Print exec --no-startup-id escrotum -Cs
+bindsym Print			exec mkdir -p $SCREENSHOTS_FOLDER && scrot --silent --quality 100 $SCREENSHOTS_FOLDER/screenshot_$(date +"IMG_%Y%m%d_%H%M%S").png
+bindsym $mod+Print		exec escrotum -C
+bindsym $mod+Shift+Print	exec --no-startup-id escrotum -Cs
 
 # media controlling
 bindsym XF86AudioPlay		exec playerctl play-pause ; exec pkill -SIGRTMIN+5 i3blocks
