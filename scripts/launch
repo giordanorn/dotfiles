@@ -15,4 +15,7 @@ case $OPTION in
 	"Thunderbird Mail")		exec thunderbird ;;
 	"Network Manager")		exec nm-applet ;;
 	"Pavucontrol Volume Control")	exec pavucontrol ;;
+	"Lutris")			exec lutris ;;
+	"GitKraken")			exec gitkraken ;;
+	"Visual Studio Code")		exec code ;;
 esac
