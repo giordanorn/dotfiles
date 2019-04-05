@@ -1,22 +1,28 @@
 #########################################
-##        i3 configuration file        ##
+####      i3 configuration file      ####
 #########################################
 
-for_window [class="^.*"] border pixel 2
+##############################
+#        WINDOW STYLE        #
+##############################
 
+# font
+font pango: Open Sans Bold 9
+
+# no window name and border
+for_window [class="^.*"] border pixel 2
 hide_edge_borders both
 
+# gaps configuration
 smart_gaps on
 gaps inner 8
 gaps outer 4
-
-font pango: Open Sans Bold 9
 
 ###########################
 #        CONSTANTS        #
 ###########################
 
-# Super / Windows Key
+# super key
 set $mod 			Mod4 
 
 set $SCRIPTS_FOLDER		$HOME/scripts
@@ -26,7 +32,7 @@ set $SCREENSHOTS_FOLDER		$(xdg-user-dir PICTURES || echo $HOME)/screenshots
 #        BINDINGS        #
 ##########################
 
-# set modifier key to Mod4
+# set floating modifier key to super key
 floating_modifier $mod
 
 # open a terminal instance and ranger
