@@ -15,8 +15,8 @@ hide_edge_borders both
 
 # gaps configuration
 smart_gaps on
-gaps inner 8
-gaps outer 4
+gaps inner 4
+gaps outer 2
 
 ###########################
 #        CONSTANTS        #
