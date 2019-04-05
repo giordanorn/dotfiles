@@ -226,7 +226,14 @@ for_window [instance="nm-connection-editor"]	floating enable
 #        STARTUP APPLICATIONS        #
 ######################################
 
-# set i3lock when close lid
-exec --no-startup-id 			xss-lock -- i3lock --blur=0
 # start notification daemon
 exec --no-startup-id 			dunst
+
+# trigger i3lock when close lid
+exec --no-startup-id 			xss-lock -- i3lock --clock --line-uses-inside --image=$WALLPAPER
+
+# set wallpaper
+exec					nitrogen --set-zoom-fill --random $(xdg-user-dir PICTURES)/wallpapers
+
+# set compositor
+exec --no-startup-id			compton --daemon --shadow-exclude 'bounding_shaped'
