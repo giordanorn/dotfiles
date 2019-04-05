@@ -25,8 +25,14 @@ gaps outer 2
 # super key
 set $mod 			Mod4 
 
-set $SCRIPTS_FOLDER		$HOME/scripts
-set $SCREENSHOTS_FOLDER		$(xdg-user-dir PICTURES || echo $HOME)/screenshots
+# applications
+set $TERMINAL			st
+set $FILE_MANAGER		pcmanfm
+
+# folders
+set $SCRIPTS			$HOME/scripts
+set $SCREENSHOTS		$(xdg-user-dir PICTURES || echo $HOME)/screenshots
+set $WALLPAPER			$(xdg-user-dir PICTURES)/wallpapers/10-3TkFymp.png
 
 ##########################
 #        BINDINGS        #
@@ -107,8 +113,8 @@ bindsym $mod+Shift+8 		move container to workspace 8
 bindsym $mod+Shift+9 		move container to workspace 9
 bindsym $mod+Shift+0 		move container to workspace 10
 
-# reload the configuration file
-bindsym $mod+Shift+c 		reload
+# take screenshot (save full screenshot on disk / copy full screenshot to clipboard / copy selected area to clipboard)
+bindsym Print			exec mkdir -p $SCREENSHOTS && scrot --silent --quality 100 $SCREENSHOTS/screenshot_$(date +"IMG_%Y%m%d_%H%M%S").png
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r 		restart
@@ -116,8 +122,6 @@ bindsym $mod+Shift+r 		restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e 		exec confirm "Do you want to end your session?"	&& exec i3-msg exit
 
-# take screenshot
-bindsym Print			exec mkdir -p $SCREENSHOTS_FOLDER && scrot --silent --quality 100 $SCREENSHOTS_FOLDER/screenshot_$(date +"IMG_%Y%m%d_%H%M%S").png
 bindsym $mod+Print		exec escrotum -C
 bindsym $mod+Shift+Print	exec --no-startup-id escrotum -Cs
 
@@ -148,9 +152,6 @@ mode "resize" {
 	bindsym Escape 			mode "default"
 }
 bindsym $mod+r 			mode "resize"
-
-# launch applications
-bindsym $mod+o			exec launch $SCRIPTS_FOLDER/launch.conf
 
 ########################
 #        COLORS        #
