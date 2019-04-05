@@ -10,7 +10,7 @@ percent_good=75
 color_crit="#FF0000"
 color_low="#FFA500"
 color_avg="#FFFF00"
-color_good=""		#I dont like to color this
+color_good=""		#I dont like to color it
 color_full="#00FF00"
 
 # icons for the label (FontAwesome)
