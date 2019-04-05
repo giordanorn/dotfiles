@@ -218,8 +218,9 @@ for_window [class="Steam"] 		move to workspace 5
 for_window [class="Thunderbird"] 	move to workspace 10
 
 # force float window
-for_window [class="Pavucontrol"] 	floating enable
-for_window [class="xawtv"] 		floating enable
+for_window [instance="pavucontrol"] 		floating enable
+for_window [instance="qvidcap"]			floating enable
+for_window [instance="nm-connection-editor"]	floating enable
 
 ######################################
 #        STARTUP APPLICATIONS        #
