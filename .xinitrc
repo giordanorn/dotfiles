@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
-xrdb -load ~/.Xresources
-exec i3
+
+# set keyboard layout
+setxkbmap -model thinkpad60 -layout br -variant abnt2
