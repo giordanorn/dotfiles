@@ -156,7 +156,8 @@ bindsym $mod+r 			mode "resize"
 ########################
 
 ##  constant colors
-set $DEFAULT_BG		#282828
+set $DEFAULT_BG		#282828dd
+set $SECONDARY_BG	#1a1a1a
 set $INACTIVE_BG	#282828
 set $URGENT_BG 		#f22c40
 
@@ -168,7 +169,7 @@ set $URGENT_TEXT	#eeeeee
 # class			border			backgr.			text		indicator		child_border
 client.focused          $URGENT_BG		$URGENT_BG		$DEFAULT_TEXT	$URGENT_BG		$URGENT_BG
 client.focused_inactive #333333			#5f676a 		#ffffff		#484e50			#5f676a
-client.unfocused        $INACTIVE_BG		$INACTIVE_BG		$INACTIVE_TEXT	$INACTIVE_BG		#222222
+client.unfocused        $INACTIVE_BG		$INACTIVE_BG		$INACTIVE_TEXT	$INACTIVE_BG		$SECONDARY_BG
 client.urgent           #2f343a			#900000			#ffffff		#900000			#900000
 client.placeholder      #000000			#0c0c0c			#ffffff		#000000			#0c0c0c
 client.background       $DEFAULT_BG
@@ -194,6 +195,7 @@ bar {
 ######################################
 
 # general configuration
+	i3bar_command i3bar -t
 	status_command i3blocks
 	position top
 	separator_symbol " "
