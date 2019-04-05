@@ -15,7 +15,7 @@ if [ $(playerctl status) != "No players found" ]; then
 	fi
 
 	case $BLOCK_BUTTON in
-		1) notify-send "$(echo -e 'Track:\t' $(playerctl metadata title) '\nArtist:\t' $(playerctl metadata artist) '\nAlbum:\t' $(playerctl metadata album))" ;;
+		1) notify-send "$(echo -e 'Listening on <i>'$PLAYER'</i> player')" "$(echo -e 'Track:\t' $(playerctl metadata title) '\nArtist:\t' $(playerctl metadata artist) '\nAlbum:\t' $(playerctl metadata album))" ;;
 	esac
 
 	echo "$LABEL $LONG_OUTPUT" # long text
