@@ -122,15 +122,15 @@ bindsym $mod+Print		exec escrotum -C
 bindsym $mod+Shift+Print	exec --no-startup-id escrotum -Cs
 
 # media controlling
-bindsym XF86AudioPlay		exec playerctl play-pause ; exec pkill -SIGRTMIN+5 i3blocks
-bindsym XF86AudioStop		exec playerctl stop ; exec pkill -SIGRTMIN+5 i3blocks
-bindsym XF86AudioNext		exec playerctl next ; exec pkill -SIGRTMIN+5 i3blocks
-bindsym XF86AudioPrev		exec playerctl previous	; exec pkill -SIGRTMIN+5 i3blocks
+bindsym XF86AudioPlay		exec playerctl play-pause, exec pkill -SIGRTMIN+5 i3blocks
+bindsym XF86AudioStop		exec playerctl stop, exec pkill -SIGRTMIN+5 i3blocks
+bindsym XF86AudioNext		exec playerctl next, exec pkill -SIGRTMIN+5 i3blocks
+bindsym XF86AudioPrev		exec playerctl previous, exec pkill -SIGRTMIN+5 i3blocks
 
 # volume controlling
-bindsym XF86AudioMute		exec amixer set Master toggle ; exec amixer set Speaker unmute ; exec amixer set Headphone unmute ; exec pkill -SIGRTMIN+10 i3blocks
-bindsym XF86AudioRaiseVolume	exec amixer set Master 5%+ unmute ; exec pkill -SIGRTMIN+10 i3blocks
-bindsym XF86AudioLowerVolume	exec amixer set Master 5%- unmute ; exec pkill -SIGRTMIN+10 i3blocks
+bindsym XF86AudioMute		exec amixer set Master toggle, exec amixer set Speaker unmute, exec amixer set Headphone unmute, exec pkill -SIGRTMIN+10 i3blocks
+bindsym XF86AudioRaiseVolume	exec amixer set Master 5%+ unmute, exec pkill -SIGRTMIN+10 i3blocks
+bindsym XF86AudioLowerVolume	exec amixer set Master 5%- unmute, exec pkill -SIGRTMIN+10 i3blocks
 
 # clean clipboard
 bindsym $mod+Shift+Insert	exec xclip -i /dev/null
