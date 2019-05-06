@@ -211,11 +211,11 @@ bindsym $mod+Shift+Tab		bar mode dock
 
 # assign applications to workspaces
 for_window [class="GitKraken"]		move to workspace 1
-for_window [class="Code"]		move to workspace 1
+for_window [instance="code-oss"]	move to workspace 1
 for_window [class="Firefox"]		move to workspace 2
 for_window [class="Telegram"]		move to workspace 3
 for_window [class="Whatsie"]		move to workspace 3
-for_window [class="Spotify"]		move to workspace 4
+for_window [instance="spotify"]		move to workspace 4
 for_window [class="Steam"] 		move to workspace 5
 for_window [class="Thunderbird"] 	move to workspace 10
 
