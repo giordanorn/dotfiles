@@ -48,10 +48,10 @@ bindsym $mod+space 		focus mode_toggle
 bindsym $mod+Shift+space 	floating toggle
 
 # shutdown, reboot, logout and lock-screen
+bindsym $mod+End 		exec confirm "Do you want to end your session?"	&& exec i3-msg exit
 bindsym $mod+Shift+End		exec confirm "Do you want to shutdown now?" && exec shutdown now
 bindsym $mod+Shift+Home		exec confirm "Do you want to reboot your machine?" && exec reboot
-bindsym $mod+Shift+e 		exec confirm "Do you want to end your session?"	&& exec i3-msg exit
-bindsym $mod+Shift+x		exec i3lock --clock --line-uses-inside --image=$WALLPAPER
+bindsym $mod+Shift+x		exec i3lock --clock --datestr="%A %B %e" --line-uses-inside --image=$WALLPAPER
 
 # reload the config file and restart i3
 bindsym $mod+Shift+c 		reload
@@ -232,7 +232,7 @@ for_window [instance="nm-connection-editor"]	floating enable
 exec --no-startup-id 			dunst
 
 # trigger i3lock when close lid
-exec --no-startup-id 			xss-lock -- i3lock --clock --line-uses-inside --image=$WALLPAPER
+exec --no-startup-id 			xss-lock -- i3lock --clock --datestr="%A %B %e" --line-uses-inside --image=$WALLPAPER
 
 # set wallpaper
 exec					nitrogen --set-zoom-fill --random $(xdg-user-dir PICTURES)/wallpapers
