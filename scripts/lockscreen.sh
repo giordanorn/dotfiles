@@ -1,4 +1,4 @@
-#!/usr/bin/sh
+#!/bin/sh
 
 # get a random file
 #WALLPAPER=$(find /usr/local/share/backgrounds | shuf | head -n1) 
