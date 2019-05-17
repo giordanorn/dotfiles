@@ -6,8 +6,8 @@
 #        WINDOW STYLE        #
 ##############################
 
-# font
 font pango: Open Sans Bold 9
+focus_follows_mouse no
 
 # no window name and border
 for_window [class="^.*"] border pixel 2
@@ -22,8 +22,8 @@ gaps outer 2
 #        CONSTANTS        #
 ###########################
 
-# super key
-set $mod 			Mod4 
+# set modifier key to super
+set $MOD 			Mod4 
 
 # applications
 set $TERMINAL			st
@@ -31,95 +31,95 @@ set $FILE_MANAGER		pcmanfm
 
 # folders
 set $SCRIPTS			$HOME/scripts
-set $SCREENSHOTS		$(xdg-user-dir PICTURES || echo $HOME)/screenshots
+set $SCREENSHOTS		$(xdg-user-dir PICTURES)/screenshots
 set $WALLPAPER			$(xdg-user-dir PICTURES)/wallpapers/10-3TkFymp.png
 
 ##########################
 #        BINDINGS        #
 ##########################
 
-# set floating modifier key to super key
-floating_modifier $mod
+# set floating modifier key to modifier key
+floating_modifier		$MOD
 
 # change focus between tiling and floating windows
-bindsym $mod+space 		focus mode_toggle
+bindsym $MOD+space 		focus mode_toggle
 
 # toggle focused window tiling and floating
-bindsym $mod+Shift+space 	floating toggle
+bindsym $MOD+Shift+space 	floating toggle
 
 # shutdown, reboot, logout and lock-screen
-bindsym $mod+End 		exec confirm "Do you want to end your session?"	&& exec i3-msg exit
-bindsym $mod+Shift+End		exec confirm "Do you want to shutdown now?" && exec shutdown now
-bindsym $mod+Shift+Home		exec confirm "Do you want to reboot your machine?" && exec reboot
-bindsym $mod+Shift+x		exec i3lock --clock --datestr="%A %B %e" --line-uses-inside --image=$WALLPAPER
+bindsym $MOD+End 		exec $SCRIPTS/confirm.sh "Do you want to end your session?"	&& exec i3-msg exit
+bindsym $MOD+Shift+End		exec $SCRIPTS/confirm.sh "Do you want to shutdown now?"		&& exec systemctl poweroff
+bindsym $MOD+Shift+Home		exec $SCRIPTS/confirm.sh "Do you want to reboot your machine?"	&& exec systemctl reboot
+bindsym $MOD+Shift+x		exec $SCRIPTS/lockscreen.sh
 
 # reload the config file and restart i3
-bindsym $mod+Shift+c 		reload
-bindsym $mod+Shift+r 		restart
+bindsym $MOD+Shift+c 		reload
+bindsym $MOD+Shift+r 		restart
 
 # instant open applications
-bindsym $mod+Return		exec $TERMINAL
-bindsym $mod+e			exec $FILE_MANAGER -n $(xdg-user-dir DESKTOP || echo $HOME)
+bindsym $MOD+Return		exec $TERMINAL
+bindsym $MOD+e			exec $FILE_MANAGER -n $(xdg-user-dir DESKTOP)
 
 # window actions
-bindsym $mod+q			kill
-bindsym $mod+f 			fullscreen toggle
+bindsym $MOD+q			kill
+bindsym $MOD+f 			fullscreen toggle
 
 # launch applications
-bindsym $mod+o			exec j4-dmenu-desktop --no-generic --dmenu="dmenu -i -f -p 'Lauch '"
-bindsym $mod+Shift+o		exec dmenu_run
+bindsym $MOD+o			exec j4-dmenu-desktop --no-generic --dmenu="dmenu -i -f -p 'Lauch '"
+bindsym $MOD+Shift+o		exec dmenu_run
 
 # change container layout
-bindsym $mod+a 			layout tabbed
-bindsym $mod+s 			layout stacking
-bindsym $mod+d 			layout toggle split
+bindsym $MOD+a 			layout tabbed
+bindsym $MOD+s 			layout stacking
+bindsym $MOD+d 			layout toggle split
 
 # split in horizontal and vertical
-bindsym $mod+c 			split h
-bindsym $mod+v 			split v
+bindsym $MOD+c 			split h
+bindsym $MOD+v 			split v
 
 # vim-like controlling windows focus, movement and resizing
-bindsym $mod+h			focus left
-bindsym $mod+j			focus down
-bindsym $mod+k			focus up
-bindsym $mod+l			focus right
-bindsym $mod+Shift+h		move left
-bindsym $mod+Shift+j		move down
-bindsym $mod+Shift+k		move up
-bindsym $mod+Shift+l		move right
-bindsym $mod+Control+h		resize shrink width 4 px or 4 ppt
-bindsym $mod+Control+j 		resize grow height 4 px or 4 ppt
-bindsym $mod+Control+k 		resize shrink height 4 px or 4 ppt
-bindsym $mod+Control+l 		resize grow width 4 px or 4 ppt
+bindsym $MOD+h			focus left
+bindsym $MOD+j			focus down
+bindsym $MOD+k			focus up
+bindsym $MOD+l			focus right
+bindsym $MOD+Shift+h		move left
+bindsym $MOD+Shift+j		move down
+bindsym $MOD+Shift+k		move up
+bindsym $MOD+Shift+l		move right
+bindsym $MOD+Control+h		resize shrink width 4 px or 4 ppt
+bindsym $MOD+Control+j 		resize grow height 4 px or 4 ppt
+bindsym $MOD+Control+k 		resize shrink height 4 px or 4 ppt
+bindsym $MOD+Control+l 		resize grow width 4 px or 4 ppt
 
 # switch to workspace
-bindsym $mod+1 			workspace 1
-bindsym $mod+2 			workspace 2
-bindsym $mod+3 			workspace 3
-bindsym $mod+4 			workspace 4
-bindsym $mod+5 			workspace 5
-bindsym $mod+6 			workspace 6
-bindsym $mod+7 			workspace 7
-bindsym $mod+8 			workspace 8
-bindsym $mod+9 			workspace 9
-bindsym $mod+0 			workspace 10
+bindsym $MOD+1 			workspace 1
+bindsym $MOD+2 			workspace 2
+bindsym $MOD+3 			workspace 3
+bindsym $MOD+4 			workspace 4
+bindsym $MOD+5 			workspace 5
+bindsym $MOD+6 			workspace 6
+bindsym $MOD+7 			workspace 7
+bindsym $MOD+8 			workspace 8
+bindsym $MOD+9 			workspace 9
+bindsym $MOD+0 			workspace 10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 		move container to workspace 1
-bindsym $mod+Shift+2 		move container to workspace 2
-bindsym $mod+Shift+3 		move container to workspace 3
-bindsym $mod+Shift+4 		move container to workspace 4
-bindsym $mod+Shift+5 		move container to workspace 5
-bindsym $mod+Shift+6 		move container to workspace 6
-bindsym $mod+Shift+7 		move container to workspace 7
-bindsym $mod+Shift+8 		move container to workspace 8
-bindsym $mod+Shift+9 		move container to workspace 9
-bindsym $mod+Shift+0 		move container to workspace 10
+bindsym $MOD+Shift+1 		move container to workspace 1
+bindsym $MOD+Shift+2 		move container to workspace 2
+bindsym $MOD+Shift+3 		move container to workspace 3
+bindsym $MOD+Shift+4 		move container to workspace 4
+bindsym $MOD+Shift+5 		move container to workspace 5
+bindsym $MOD+Shift+6 		move container to workspace 6
+bindsym $MOD+Shift+7 		move container to workspace 7
+bindsym $MOD+Shift+8 		move container to workspace 8
+bindsym $MOD+Shift+9 		move container to workspace 9
+bindsym $MOD+Shift+0 		move container to workspace 10
 
 # take screenshot (save full screenshot on disk / copy full screenshot to clipboard / copy selected area to clipboard)
 bindsym Print			exec mkdir -p $SCREENSHOTS && scrot --silent --quality 100 $SCREENSHOTS/screenshot_$(date +"IMG_%Y%m%d_%H%M%S").png
-bindsym $mod+Print		exec escrotum -C
-bindsym $mod+Shift+Print	exec --no-startup-id escrotum -Cs
+bindsym $MOD+Print		exec escrotum -C
+bindsym $MOD+Shift+Print	exec --no-startup-id escrotum -Cs
 
 # media controlling
 bindsym XF86AudioPlay		exec playerctl play-pause, exec pkill -SIGRTMIN+5 i3blocks
@@ -133,7 +133,7 @@ bindsym XF86AudioRaiseVolume	exec amixer set Master 5%+ unmute, exec pkill -SIGR
 bindsym XF86AudioLowerVolume	exec amixer set Master 5%- unmute, exec pkill -SIGRTMIN+10 i3blocks
 
 # clean clipboard
-bindsym $mod+Shift+Insert	exec xclip -i /dev/null
+bindsym $MOD+Shift+Insert	exec xclip -i /dev/null
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -149,14 +149,14 @@ mode "resize" {
 }
 
 # enter resize mode
-bindsym $mod+r 			mode "resize"
+bindsym $MOD+r 			mode "resize"
 
 ########################
 #        COLORS        #
 ########################
 
 ##  constant colors
-set $DEFAULT_BG		#282828dd
+set $DEFAULT_BG		#282828
 set $SECONDARY_BG	#1a1a1a
 set $INACTIVE_BG	#282828
 set $URGENT_BG 		#f22c40
@@ -177,9 +177,9 @@ client.background       $DEFAULT_BG
 ## bar colors
 bar {
 	colors {
-		background 	$DEFAULT_BG
-		statusline 	$DEFAULT_TEXT
-		separator 	$DEFAULT_TEXT
+		background 		$DEFAULT_BG
+		statusline 		$DEFAULT_TEXT
+		separator 		$DEFAULT_TEXT
 
 		## bar colors
 		# class			border		background	text
@@ -195,15 +195,16 @@ bar {
 ######################################
 
 # general configuration
-	i3bar_command i3bar -t
-	status_command i3blocks
-	position top
-	separator_symbol " "
+	i3bar_command		i3bar -t
+	status_command		i3blocks
+	position		top
+	separator_symbol	" "
 }
 
 # show/hide bar
-bindsym $mod+Tab 		bar mode invisible
-bindsym $mod+Shift+Tab		bar mode dock
+bindsym $MOD+Tab 		bar mode invisible
+bindsym $MOD+Shift+Tab		bar mode dock
+bindsym $MOD+Ctrl+Shift+Tab	bar mode hide
 
 ####################################
 #        WINDOW ASSIGNMENTS        #
@@ -229,13 +230,10 @@ for_window [instance="nm-connection-editor"]	floating enable
 ######################################
 
 # start notification daemon
-exec --no-startup-id 			dunst
+exec --no-startup-id 		dunst
 
 # trigger i3lock when close lid
-exec --no-startup-id 			xss-lock -- i3lock --clock --datestr="%A %B %e" --line-uses-inside --image=$WALLPAPER
-
-# set wallpaper
-exec					nitrogen --set-zoom-fill --random $(xdg-user-dir PICTURES)/wallpapers
+exec --no-startup-id 		xss-lock -- $SCRIPTS/lockscreen.sh
 
 # set compositor
-exec --no-startup-id			compton --daemon --shadow-exclude 'bounding_shaped'
+exec --no-startup-id		compton --daemon --shadow-exclude 'bounding_shaped'
