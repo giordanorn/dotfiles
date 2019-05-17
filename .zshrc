@@ -27,9 +27,4 @@ RPROMPT=\$vcs_info_msg_0_
 # PROMPT=\$vcs_info_msg_0_'%# '
 zstyle ':vcs_info:git:*' formats '%b'
 
-export EDITOR="vim"
-export BROWSER="firefox"
-export READER="evince"
-export TERMINAL="st"
-
 [ -f "$HOME/.aliases" ] && source "$HOME/.aliases"
