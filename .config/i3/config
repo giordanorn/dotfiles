@@ -47,10 +47,8 @@ bindsym $MOD+space 		focus mode_toggle
 # toggle focused window tiling and floating
 bindsym $MOD+Shift+space 	floating toggle
 
-# shutdown, reboot, logout and lock-screen
-bindsym $MOD+End 		exec $SCRIPTS/confirm.sh "Do you want to end your session?"	&& exec i3-msg exit
-bindsym $MOD+Shift+End		exec $SCRIPTS/confirm.sh "Do you want to shutdown now?"		&& exec systemctl poweroff
-bindsym $MOD+Shift+Home		exec $SCRIPTS/confirm.sh "Do you want to reboot your machine?"	&& exec systemctl reboot
+# system options (shutdown, logout, etc) and lock-screen
+bindsym $MOD+End 		exec $SCRIPTS/system_options.sh
 bindsym $MOD+Shift+x		exec $SCRIPTS/lockscreen.sh
 
 # reload the config file and restart i3
