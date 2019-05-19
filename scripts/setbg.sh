@@ -1,4 +1,4 @@
 #!/bin/sh
 
-/usr/bin/feh -z --bg-fill /usr/local/share/backgrounds 
+/usr/bin/feh --randomize --bg-fill /usr/local/share/backgrounds 
 

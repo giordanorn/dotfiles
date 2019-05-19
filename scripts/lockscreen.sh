@@ -1,13 +1,17 @@
 #!/bin/sh
 
-# get a random file
-WALLPAPER=$(find /usr/local/share/backgrounds | shuf | head -n1) 
+## get a random file
+#WALLPAPER=$(find /usr/local/share/backgrounds | shuf | head -n1) 
+
+# get current wallpaper set by feh
+WALLPAPER=$(cat $HOME/.fehbg | grep feh | awk '{ print $3 }' | tr -d \') 
 
 # suspend notification daemon
-pkill -STOP dunst
+pkill -u "$USER" -USR1 dunst
 
-pgrep -x i3lock || \
+pgrep -x i3lock | \
 	i3lock \
+		--nofork \
 		--force-clock \
 		--datestr="%A %B %e" \
 		--line-uses-inside \
@@ -32,4 +36,4 @@ pgrep -x i3lock || \
 		--noinputtext="" \
 
 # resume notification daemon
-pkill -CONT dunst
+pkill -u "$USER" -USR2 dunst
