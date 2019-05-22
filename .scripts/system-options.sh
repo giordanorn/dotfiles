@@ -2,7 +2,8 @@
 
 OPTION=`echo -e "Shutdown\nReboot\nHibernate\nSuspend\nLogout\nNevermind" | dmenu -i -p "What do you want to do?"`
 
-CONFIRM=$HOME/scripts/confirm.sh
+# IT NEEDS A BETTER SOLUTION
+CONFIRM=$HOME/.scripts/confirm.sh
 
 case $OPTION in
 	"Shutdown")
