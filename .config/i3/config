@@ -30,7 +30,7 @@ set $TERMINAL			st
 set $FILE_MANAGER		pcmanfm
 
 # folders
-set $SCRIPTS			$HOME/scripts
+set $SCRIPTS			$HOME/.scripts
 set $SCREENSHOTS		$(xdg-user-dir PICTURES)/screenshots
 set $WALLPAPER			$(xdg-user-dir PICTURES)/wallpapers/10-3TkFymp.png
 
@@ -48,8 +48,8 @@ bindsym $MOD+space 		focus mode_toggle
 bindsym $MOD+Shift+space 	floating toggle
 
 # system options (shutdown, logout, etc) and lock-screen
-bindsym $MOD+End 		exec $SCRIPTS/system_options.sh
-bindsym $MOD+Shift+x		exec $SCRIPTS/lockscreen.sh
+bindsym $MOD+End 		exec $SCRIPTS/system-options.sh
+bindsym $MOD+Shift+x		exec $SCRIPTS/screenlocker.sh
 
 # reload the config file and restart i3
 bindsym $MOD+Shift+c 		reload
@@ -231,7 +231,7 @@ for_window [instance="nm-connection-editor"]	floating enable
 exec --no-startup-id 		dunst
 
 # trigger i3lock when close lid
-exec --no-startup-id 		xss-lock -- $SCRIPTS/lockscreen.sh
+exec --no-startup-id 		xss-lock -- $SCRIPTS/screenlocker.sh
 
 # set compositor
 exec --no-startup-id		compton --daemon -cCGf --blur-background-frame --backend glx
