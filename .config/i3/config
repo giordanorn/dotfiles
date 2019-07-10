@@ -11,228 +11,231 @@ focus_follows_mouse no
 
 # no window name and border
 for_window [class="^.*"] border pixel 2
-hide_edge_borders both
+hide_edge_borders smart
 
 # gaps configuration
-smart_gaps on
-gaps inner 4
-gaps outer 2
+#smart_gaps on
+#gaps inner 2
+#gaps inner 4
+#gaps outer 2
 
 ###########################
 #        CONSTANTS        #
 ###########################
 
 # set modifier key to super
-set $MOD 			Mod4 
+set $MOD                        Mod4 
 
 # applications
-set $TERMINAL			st
-set $FILE_MANAGER		pcmanfm
+set $TERMINAL                   st
+set $FILE_MANAGER               pcmanfm
 
 # folders
-set $SCRIPTS			$HOME/.scripts
-set $SCREENSHOTS		$(xdg-user-dir PICTURES)/screenshots
-set $WALLPAPER			$(xdg-user-dir PICTURES)/wallpapers/10-3TkFymp.png
+set $SCRIPTS                    $HOME/.scripts
+set $SCREENSHOTS                $(xdg-user-dir PICTURES)/screenshots
+set $WALLPAPER                  $(xdg-user-dir PICTURES)/wallpapers/10-3TkFymp.png
 
 ##########################
 #        BINDINGS        #
 ##########################
 
 # set floating modifier key to modifier key
-floating_modifier		$MOD
+floating_modifier               $MOD
 
 # change focus between tiling and floating windows
-bindsym $MOD+space 		focus mode_toggle
+bindsym $MOD+space              focus mode_toggle
 
 # toggle focused window tiling and floating
-bindsym $MOD+Shift+space 	floating toggle
+bindsym $MOD+Shift+space        floating toggle
 
 # system options (shutdown, logout, etc) and lock-screen
-bindsym $MOD+End 		exec $SCRIPTS/system-options.sh
-bindsym $MOD+Shift+x		exec $SCRIPTS/screenlocker.sh
+bindsym $MOD+End                exec $SCRIPTS/system-options.sh
+bindsym $MOD+Shift+x            exec $SCRIPTS/screenlocker.sh
 
 # reload the config file and restart i3
-bindsym $MOD+Shift+c 		reload
-bindsym $MOD+Shift+r 		restart
+bindsym $MOD+Shift+c            reload
+bindsym $MOD+Shift+r            restart
 
 # instant open applications
-bindsym $MOD+Return		exec $TERMINAL
-bindsym $MOD+e			exec $FILE_MANAGER -n $(xdg-user-dir DESKTOP)
+bindsym $MOD+Return             exec $TERMINAL
+bindsym $MOD+e                  exec $FILE_MANAGER -n $(xdg-user-dir DESKTOP)
 
 # window actions
-bindsym $MOD+q			kill
-bindsym $MOD+f 			fullscreen toggle
+bindsym $MOD+q                  kill
+bindsym $MOD+f                  fullscreen toggle
 
 # launch applications
-bindsym $MOD+o			exec j4-dmenu-desktop --no-generic --dmenu="dmenu -i -f -p 'Lauch '"
-bindsym $MOD+Shift+o		exec dmenu_run
+bindsym $MOD+o                  exec j4-dmenu-desktop --no-generic --dmenu="dmenu -i -f -p 'Lauch '"
+bindsym $MOD+Shift+o            exec dmenu_run
 
 # change container layout
-bindsym $MOD+a 			layout tabbed
-bindsym $MOD+s 			layout stacking
-bindsym $MOD+d 			layout toggle split
+bindsym $MOD+a                  layout tabbed
+bindsym $MOD+s                  layout stacking
+bindsym $MOD+d                  layout toggle split
 
 # split in horizontal and vertical
-bindsym $MOD+c 			split h
-bindsym $MOD+v 			split v
+bindsym $MOD+c                  split h
+bindsym $MOD+v                  split v
 
 # vim-like controlling windows focus, movement and resizing
-bindsym $MOD+h			focus left
-bindsym $MOD+j			focus down
-bindsym $MOD+k			focus up
-bindsym $MOD+l			focus right
-bindsym $MOD+Shift+h		move left
-bindsym $MOD+Shift+j		move down
-bindsym $MOD+Shift+k		move up
-bindsym $MOD+Shift+l		move right
-bindsym $MOD+Control+h		resize shrink width 4 px or 4 ppt
-bindsym $MOD+Control+j 		resize grow height 4 px or 4 ppt
-bindsym $MOD+Control+k 		resize shrink height 4 px or 4 ppt
-bindsym $MOD+Control+l 		resize grow width 4 px or 4 ppt
+bindsym $MOD+h                  focus left
+bindsym $MOD+j                  focus down
+bindsym $MOD+k                  focus up
+bindsym $MOD+l                  focus right
+bindsym $MOD+Shift+h            move left
+bindsym $MOD+Shift+j            move down
+bindsym $MOD+Shift+k            move up
+bindsym $MOD+Shift+l            move right
+bindsym $MOD+Control+h          resize shrink width 4 px or 4 ppt
+bindsym $MOD+Control+j          resize grow height 4 px or 4 ppt
+bindsym $MOD+Control+k          resize shrink height 4 px or 4 ppt
+bindsym $MOD+Control+l          resize grow width 4 px or 4 ppt
 
 # switch to workspace
-bindsym $MOD+1 			workspace 1
-bindsym $MOD+2 			workspace 2
-bindsym $MOD+3 			workspace 3
-bindsym $MOD+4 			workspace 4
-bindsym $MOD+5 			workspace 5
-bindsym $MOD+6 			workspace 6
-bindsym $MOD+7 			workspace 7
-bindsym $MOD+8 			workspace 8
-bindsym $MOD+9 			workspace 9
-bindsym $MOD+0 			workspace 10
+bindsym $MOD+1                  workspace 1
+bindsym $MOD+2                  workspace 2
+bindsym $MOD+3                  workspace 3
+bindsym $MOD+4                  workspace 4
+bindsym $MOD+5                  workspace 5
+bindsym $MOD+6                  workspace 6
+bindsym $MOD+7                  workspace 7
+bindsym $MOD+8                  workspace 8
+bindsym $MOD+9                  workspace 9
+bindsym $MOD+0                  workspace 10
 
 # move focused container to workspace
-bindsym $MOD+Shift+1 		move container to workspace 1
-bindsym $MOD+Shift+2 		move container to workspace 2
-bindsym $MOD+Shift+3 		move container to workspace 3
-bindsym $MOD+Shift+4 		move container to workspace 4
-bindsym $MOD+Shift+5 		move container to workspace 5
-bindsym $MOD+Shift+6 		move container to workspace 6
-bindsym $MOD+Shift+7 		move container to workspace 7
-bindsym $MOD+Shift+8 		move container to workspace 8
-bindsym $MOD+Shift+9 		move container to workspace 9
-bindsym $MOD+Shift+0 		move container to workspace 10
+bindsym $MOD+Shift+1            move container to workspace 1
+bindsym $MOD+Shift+2            move container to workspace 2
+bindsym $MOD+Shift+3            move container to workspace 3
+bindsym $MOD+Shift+4            move container to workspace 4
+bindsym $MOD+Shift+5            move container to workspace 5
+bindsym $MOD+Shift+6            move container to workspace 6
+bindsym $MOD+Shift+7            move container to workspace 7
+bindsym $MOD+Shift+8            move container to workspace 8
+bindsym $MOD+Shift+9            move container to workspace 9
+bindsym $MOD+Shift+0            move container to workspace 10
 
 # take screenshot (save full screenshot on disk / copy full screenshot to clipboard / copy selected area to clipboard)
-bindsym Print			exec mkdir -p $SCREENSHOTS && scrot --silent --quality 100 $SCREENSHOTS/screenshot_$(date +"IMG_%Y%m%d_%H%M%S").png
-bindsym $MOD+Print		exec escrotum -C
-bindsym $MOD+Shift+Print	exec --no-startup-id escrotum -Cs
+bindsym Print                   exec mkdir -p $SCREENSHOTS && scrot --silent --quality 100 $SCREENSHOTS/screenshot_$(date +"IMG_%Y%m%d_%H%M%S").png
+bindsym $MOD+Print              exec escrotum -C
+bindsym $MOD+Shift+Print        exec --no-startup-id escrotum -Cs
 
 # media controlling
-bindsym XF86AudioPlay		exec playerctl play-pause, exec pkill -SIGRTMIN+5 i3blocks
-bindsym XF86AudioStop		exec playerctl stop, exec pkill -SIGRTMIN+5 i3blocks
-bindsym XF86AudioNext		exec playerctl next, exec pkill -SIGRTMIN+5 i3blocks
-bindsym XF86AudioPrev		exec playerctl previous, exec pkill -SIGRTMIN+5 i3blocks
+bindsym XF86AudioPlay           exec playerctl play-pause, exec pkill -SIGRTMIN+5 i3blocks
+bindsym XF86AudioStop           exec playerctl stop, exec pkill -SIGRTMIN+5 i3blocks
+bindsym XF86AudioNext           exec playerctl next, exec pkill -SIGRTMIN+5 i3blocks
+bindsym XF86AudioPrev           exec playerctl previous, exec pkill -SIGRTMIN+5 i3blocks
 
 # volume controlling
-bindsym XF86AudioMute		exec amixer set Master toggle, exec amixer set Speaker unmute, exec amixer set Headphone unmute, exec pkill -SIGRTMIN+10 i3blocks
-bindsym XF86AudioRaiseVolume	exec amixer set Master 5%+ unmute, exec pkill -SIGRTMIN+10 i3blocks
-bindsym XF86AudioLowerVolume	exec amixer set Master 5%- unmute, exec pkill -SIGRTMIN+10 i3blocks
+bindsym XF86AudioMute           exec amixer set Master toggle, exec amixer set Speaker unmute, exec amixer set Headphone unmute, exec pkill -SIGRTMIN+10 i3blocks
+bindsym XF86AudioRaiseVolume    exec amixer set Master 5%+ unmute, exec pkill -SIGRTMIN+10 i3blocks
+bindsym XF86AudioLowerVolume    exec amixer set Master 5%- unmute, exec pkill -SIGRTMIN+10 i3blocks
 
 # clean clipboard
-bindsym $MOD+Shift+Insert	exec xclip -i /dev/null
+bindsym $MOD+Shift+Insert       exec xclip -i /dev/null
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-	# those high px are recommended for floating windows
-	bindsym h resize 		shrink width 50 px or 50 ppt
-	bindsym j resize 		grow height 50 px or 50 ppt
-	bindsym k resize 		shrink height 50 px or 50 ppt
-	bindsym l resize 		grow width 50 px or 50 ppt
+    # those high px are recommended for floating windows
+    bindsym h resize            shrink width 50 px or 50 ppt
+    bindsym j resize            grow height 50 px or 50 ppt
+    bindsym k resize            shrink height 50 px or 50 ppt
+    bindsym l resize            grow width 50 px or 50 ppt
 
-	# back to normal: Enter or Escape
-	bindsym Return 			mode "default"
-	bindsym Escape 			mode "default"
+    # back to normal: Enter or Escape
+    bindsym Return              mode "default"
+    bindsym Escape              mode "default"
 }
 
 # enter resize mode
-bindsym $MOD+r 			mode "resize"
+bindsym $MOD+r                  mode "resize"
 
 ########################
 #        COLORS        #
 ########################
 
 ##  constant colors
-set $DEFAULT_BG		#282828
-set $SECONDARY_BG	#1a1a1a
-set $INACTIVE_BG	#282828
-set $URGENT_BG 		#f22c40
+set $DEFAULT_BG                 #282828
+set $SECONDARY_BG               #1a1a1a
+set $INACTIVE_BG                #282828
+set $URGENT_BG                  #f22c40
 
-set $DEFAULT_TEXT 	#eeeeee
-set $INACTIVE_TEXT 	#808080
-set $URGENT_TEXT	#eeeeee
+set $DEFAULT_TEXT               #eeeeee
+set $INACTIVE_TEXT              #808080
+set $URGENT_TEXT                #eeeeee
 
-##  window colors
-# class			border			backgr.			text		indicator		child_border
-client.focused          $URGENT_BG		$URGENT_BG		$DEFAULT_TEXT	$URGENT_BG		$URGENT_BG
-client.focused_inactive #333333			#5f676a 		#ffffff		#484e50			#5f676a
-client.unfocused        $INACTIVE_BG		$INACTIVE_BG		$INACTIVE_TEXT	$INACTIVE_BG		$SECONDARY_BG
-client.urgent           #2f343a			#900000			#ffffff		#900000			#900000
-client.placeholder      #000000			#0c0c0c			#ffffff		#000000			#0c0c0c
-client.background       $DEFAULT_BG
+##  window color
+# class                         border              backgr.             text                indicator           child_border
+client.focused                  $URGENT_BG          $URGENT_BG          $DEFAULT_TEXT       $URGENT_BG          $URGENT_BG
+client.focused_inactive         #333333             #5f676a             #ffffff             #484e50             #5f676a
+client.unfocused                $INACTIVE_BG        $INACTIVE_BG        $INACTIVE_TEXT      $INACTIVE_BG        $SECONDARY_BG
+client.urgent                   #2f343a             #900000             #ffffff             #900000             #900000
+client.placeholder              #000000             #0c0c0c             #ffffff             #000000             #0c0c0c
+client.background               $DEFAULT_BG
 
 ## bar colors
 bar {
-	colors {
-		background 		$DEFAULT_BG
-		statusline 		$DEFAULT_TEXT
-		separator 		$DEFAULT_TEXT
+    colors {
+        background              $DEFAULT_BG
+        statusline              $DEFAULT_TEXT
+        separator               $DEFAULT_TEXT
 
-		## bar colors
-		# class			border		background	text
-		focused_workspace	$DEFAULT_BG	$DEFAULT_BG	$DEFAULT_TEXT
-		active_workspace	$DEFAULT_BG	$DEFAULT_BG	$DEFAULT_TEXT
-		inactive_workspace	$DEFAULT_BG	$DEFAULT_BG	$INACTIVE_TEXT
-		urgent_workspace	$URGENT_BG	$URGENT_BG	$URGENT_TEXT
-		#binding_mode
-	}
+        ## bar colors
+        # class                 border              background          text
+        focused_workspace       $DEFAULT_BG         $DEFAULT_BG         $DEFAULT_TEXT
+        active_workspace        $DEFAULT_BG         $DEFAULT_BG         $DEFAULT_TEXT
+        inactive_workspace      $DEFAULT_BG         $DEFAULT_BG         $INACTIVE_TEXT
+        urgent_workspace        $URGENT_BG          $URGENT_BG          $URGENT_TEXT
+        #binding_mode
+    }
 
 ######################################
 #        i3bar CONFIGURATION         #
 ######################################
 
 # general configuration
-	i3bar_command		i3bar -t
-	status_command		i3blocks
-	position		top
-	separator_symbol	" "
+    i3bar_command               i3bar -t
+    status_command              i3blocks
+    position                    top
+    separator_symbol            " "
 }
 
 # show/hide bar
-bindsym $MOD+Tab 		bar mode invisible
-bindsym $MOD+Shift+Tab		bar mode dock
-bindsym $MOD+Ctrl+Shift+Tab	bar mode hide
+bindsym $MOD+Tab                bar mode invisible
+bindsym $MOD+Shift+Tab          bar mode dock
+bindsym $MOD+Ctrl+Shift+Tab     bar mode hide
 
 ####################################
 #        WINDOW ASSIGNMENTS        #
 ####################################
 
 # assign applications to workspaces
-for_window [class="GitKraken"]		move to workspace 1
-for_window [instance="code-oss"]	move to workspace 1
-for_window [class="Firefox"]		move to workspace 2
-for_window [class="Telegram"]		move to workspace 3
-for_window [class="Whatsie"]		move to workspace 3
-for_window [instance="spotify"]		move to workspace 4
-for_window [class="Steam"] 		move to workspace 5
-for_window [class="Thunderbird"] 	move to workspace 10
+for_window [instance="gitkraken"]                   move to workspace 1
+for_window [instance="code-oss"]                    move to workspace 1
+for_window [instance="unityhub"]                    move to workspace 1
+for_window [instance="Unity"]                       move to workspace 1
+for_window [class="Firefox"]                        move to workspace 2
+for_window [class="Telegram"]                       move to workspace 3
+for_window [class="Whatsie"]                        move to workspace 3
+for_window [instance="spotify"]                     move to workspace 4
+for_window [class="Steam"]                          move to workspace 5
+for_window [class="Thunderbird"]                    move to workspace 10
 
 # force float window
-for_window [instance="pavucontrol"] 		floating enable
-for_window [instance="qvidcap"]			floating enable
-for_window [instance="nm-connection-editor"]	floating enable
+for_window [instance="pavucontrol"]                 floating enable
+for_window [instance="qvidcap"]                     floating enable
+for_window [instance="nm-connection-editor"]        floating enable
 
 ######################################
 #        STARTUP APPLICATIONS        #
 ######################################
 
 # start notification daemon
-exec --no-startup-id 		dunst
+exec --no-startup-id            dunst
 
 # trigger i3lock when close lid
-exec --no-startup-id 		xss-lock -- $SCRIPTS/screenlocker.sh
+exec --no-startup-id            xss-lock -- $SCRIPTS/screenlocker.sh
 
 # set compositor
-exec --no-startup-id		compton --daemon -cCGf --blur-background-frame --backend glx
+exec --no-startup-id            compton --daemon -cCGf --blur-background-frame --backend glx --shadow-exclude 'bounding_shaped'
 
