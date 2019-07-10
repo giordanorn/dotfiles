@@ -10,7 +10,7 @@ percent_good=75
 color_crit="#FF0000"
 color_low="#FFA500"
 color_avg="#FFFF00"
-color_good=""		#I dont like to color it
+color_good=""		# I dont like to color it
 color_full="#00FF00"
 
 # icons for the label (FontAwesome)
@@ -28,7 +28,7 @@ output=$(acpi -b)
 # get current battery percentual charge
 percent=$(echo "$output" | cut -d " " -f4 | tr -d ,%)
 
-#get current estimated time for charging|discharging
+# get current estimated time for charging|discharging
 estimated_time() {
 	_time="$(echo $output | cut -d " " -f5 | cut -c1-5 | tr -d a-zA-Z )"
 	if [[ -n $_time ]]; then
@@ -46,12 +46,17 @@ estimated_time() {
 	echo $_time;
 }
 
-if [[ -n $(echo $output | grep Charging) ]]; then
+if [[ ! -n $(echo $output) ]]; then
+	label=$charging
+	color=$color_full
+	echo "$label"
+elif [[ -n $(echo $output | grep Charging) ]]; then
 	label=$charging
 	estimated=`estimated_time`
 	if [[ $percent -eq 100 ]]; then
 		color=$color_full
 	fi
+	echo "$label $percent% $estimated"
 else
 	if [[ -n $(echo $output | grep Unknown) ]]; then
 		# disabled due to acpi reporting Unknown behavior in some actually known momments
@@ -79,10 +84,12 @@ else
 
 	if [[ -n $(echo $output | grep Discharging) ]]; then
 		estimated=`estimated_time`
+		echo "$label $percent% $estimated"
+	else
+		echo "$label $percent%"
 	fi
+
 fi
 
-
-echo "$label $percent% $estimated"	# full text
-echo "$label $percent%"			# short text
-echo "$color"				# display color
+echo "$label"                       # short text
+echo "$color"                       # display color
