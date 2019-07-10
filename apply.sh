@@ -3,7 +3,7 @@
 # apply all files from dotfiles to its correspondent folders in your home directory
 
 # catch all files in repo
-files=`find -mindepth 1 $SCRITPS -type f | grep -v .git | grep -v *.md`
+files=`find -mindepth 1 $SCRITPS -type f | grep -v '.git\/\|.md\|pull.sh\|apply.sh'`
 
 # diff all of them with correspondent local file on machine
 for file in $files
