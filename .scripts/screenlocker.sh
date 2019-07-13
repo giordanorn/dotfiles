@@ -9,7 +9,7 @@ WALLPAPER=$(cat $HOME/.fehbg | grep feh | awk '{ print $3 }' | tr -d \')
 # suspend notification daemon
 pkill -u "$USER" -USR1 dunst
 
-pgrep -x i3lock | \
+pgrep -x i3lock || \
 	i3lock \
 		--nofork \
 		--force-clock \
