@@ -26,6 +26,12 @@ hide_edge_borders smart
 # set modifier key to super
 set $MOD                        Mod4 
 
+# set directional keys
+set $LEFT                       h
+set $DOWN                       j
+set $UP                         k
+set $RIGHT                      l
+
 # applications
 set $TERMINAL                   st
 set $FILE_MANAGER               pcmanfm
@@ -77,19 +83,19 @@ bindsym $MOD+d                  layout toggle split
 bindsym $MOD+c                  split h
 bindsym $MOD+v                  split v
 
-# vim-like controlling windows focus, movement and resizing
-bindsym $MOD+h                  focus left
-bindsym $MOD+j                  focus down
-bindsym $MOD+k                  focus up
-bindsym $MOD+l                  focus right
-bindsym $MOD+Shift+h            move left
-bindsym $MOD+Shift+j            move down
-bindsym $MOD+Shift+k            move up
-bindsym $MOD+Shift+l            move right
-bindsym $MOD+Control+h          resize shrink width 4 px or 4 ppt
-bindsym $MOD+Control+j          resize grow height 4 px or 4 ppt
-bindsym $MOD+Control+k          resize shrink height 4 px or 4 ppt
-bindsym $MOD+Control+l          resize grow width 4 px or 4 ppt
+# controlling windows focus, movement and resizing
+bindsym $MOD+$LEFT              focus left
+bindsym $MOD+$DOWN              focus down
+bindsym $MOD+$UP                focus up
+bindsym $MOD+$RIGHT             focus right
+bindsym $MOD+Shift+$LEFT        move left
+bindsym $MOD+Shift+$DOWN        move down
+bindsym $MOD+Shift+$UP          move up
+bindsym $MOD+Shift+$RIGHT       move right
+bindsym $MOD+Control+$LEFT      resize shrink width 4 px or 4 ppt
+bindsym $MOD+Control+$DOWN      resize grow height 4 px or 4 ppt
+bindsym $MOD+Control+$UP        resize shrink height 4 px or 4 ppt
+bindsym $MOD+Control+$RIGHT     resize grow width 4 px or 4 ppt
 
 # switch to workspace
 bindsym $MOD+1                  workspace 1
