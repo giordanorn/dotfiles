@@ -109,17 +109,17 @@ bindsym $MOD+8                  workspace 8
 bindsym $MOD+9                  workspace 9
 bindsym $MOD+0                  workspace 10
 
-# move focused container to workspace
-bindsym $MOD+Shift+1            move container to workspace 1
-bindsym $MOD+Shift+2            move container to workspace 2
-bindsym $MOD+Shift+3            move container to workspace 3
-bindsym $MOD+Shift+4            move container to workspace 4
-bindsym $MOD+Shift+5            move container to workspace 5
-bindsym $MOD+Shift+6            move container to workspace 6
-bindsym $MOD+Shift+7            move container to workspace 7
-bindsym $MOD+Shift+8            move container to workspace 8
-bindsym $MOD+Shift+9            move container to workspace 9
-bindsym $MOD+Shift+0            move container to workspace 10
+# move focused container and switch to workspace
+bindsym $MOD+Shift+1            move container to workspace 1, workspace 1
+bindsym $MOD+Shift+2            move container to workspace 2, workspace 2
+bindsym $MOD+Shift+3            move container to workspace 3, workspace 3
+bindsym $MOD+Shift+4            move container to workspace 4, workspace 4
+bindsym $MOD+Shift+5            move container to workspace 5, workspace 5
+bindsym $MOD+Shift+6            move container to workspace 6, workspace 6
+bindsym $MOD+Shift+7            move container to workspace 7, workspace 7
+bindsym $MOD+Shift+8            move container to workspace 8, workspace 8
+bindsym $MOD+Shift+9            move container to workspace 9, workspace 9
+bindsym $MOD+Shift+0            move container to workspace 10, workspace 10
 
 # take screenshot (save full screenshot on disk / copy full screenshot to clipboard / copy selected area to clipboard)
 bindsym Print                   exec mkdir -p $SCREENSHOTS && scrot --silent --quality 100 $SCREENSHOTS/screenshot_$(date +"IMG_%Y%m%d_%H%M%S").png
