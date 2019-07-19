@@ -10,7 +10,7 @@ percent_good=75
 color_crit="#FF0000"
 color_low="#FFA500"
 color_avg="#FFFF00"
-color_good=""		# I dont like to color it
+color_good=""		     # fill this field if you want to use this color
 color_full="#00FF00"
 
 # icons for the label (FontAwesome)
@@ -19,77 +19,55 @@ bat_low=""
 bat_avg=""
 bat_good=""
 bat_full=""
-charging=""
-loading=""
+bat_plugged=""
 
 # main command (acpi)
-output=$(acpi -b)
+ac_info=`acpi --ac-adapter`
+bat_info=`acpi --battery`
 
-# get current battery percentual charge
-percent=$(echo "$output" | cut -d " " -f4 | tr -d ,%)
-
-# get current estimated time for charging|discharging
-estimated_time() {
-	_time="$(echo $output | cut -d " " -f5 | cut -c1-5 | tr -d a-zA-Z )"
-	if [[ -n $_time ]]; then
-		_hour=$(echo $_time | cut -c1-2)
-		_minutes=$(echo $_time | cut -c4-5)
-		if [[ $_hour -eq 0 ]];then
-			_hour=""
-			_minutes="${_minutes}m"
-		else
-			_hour="${_hour}h"
-			_minutes="${_minutes}"
-		fi
-		_time="($_hour$_minutes)"
-	fi
-	echo $_time;
-}
-
-if [[ ! -n $(echo $output) ]]; then
-	label=$charging
-	color=$color_full
-	echo "$label"
-elif [[ -n $(echo $output | grep Charging) ]]; then
-	label=$charging
-	estimated=`estimated_time`
-	if [[ $percent -eq 100 ]]; then
-		color=$color_full
-	fi
-	echo "$label $percent% $estimated"
+# set battery label and color based on percent level
+percent=`echo "$bat_info" | cut -d " " -f4 | tr -d ,%`
+if [[ $percent -le $percent_crit ]]; then
+	color=$color_crit
+	label=$bat_crit
+elif [[ $percent -le $percent_low ]]; then
+	color=$color_low
+	label=$bat_low
+elif [[ $percent -le $percent_avg ]]; then
+	color=$color_avg
+	label=$bat_avg
+elif [[ $percent -le $percent_good ]]; then
+	color=$color_good
+	label=$bat_good
 else
-	if [[ -n $(echo $output | grep Unknown) ]]; then
-		# disabled due to acpi reporting Unknown behavior in some actually known momments
-		color=$color_full
-		label=$charging
-	elif [[ -n $(echo $output | grep Full) ]]; then
-		color=$color_full
-		label=$charging
-	elif [[ $percent -le $percent_crit ]]; then
-		color=$color_crit
-		label=$bat_crit
-	elif [[ $percent -le $percent_low ]]; then
-		color=$color_low
-		label=$bat_low
-	elif [[ $percent -le $percent_avg ]]; then
-		color=$color_avg
-		label=$bat_avg
-	elif [[ $percent -le $percent_good ]]; then
-		color=$color_good
-		label=$bat_good
-	else
-		#color=$color_full
-		label=$bat_full
-	fi
-
-	if [[ -n $(echo $output | grep Discharging) ]]; then
-		estimated=`estimated_time`
-		echo "$label $percent% $estimated"
-	else
-		echo "$label $percent%"
-	fi
-
+	label=$bat_full
 fi
 
+# set plugged label if is plugged and color to green if is fully charged
+plugged=`echo "$ac_info" | cut -c12-`
+if [[ "$plugged" = "on-line" ]]; then
+	label=$bat_plugged
+	color=""
+	if [[ $percent -ge 99 ]]; then
+		color=$color_full
+	fi
+fi
+
+# format estimated time
+estimated_time=`echo "$bat_info" | cut -d " " -f5 | cut -c1-5 | tr -d a-zA-Z`
+if [[ -n $estimated_time ]]; then
+	_hour=`echo "$estimated_time" | cut -c1-2`
+	_minutes=`echo "$estimated_time" | cut -c4-5`
+	if [[ $_hour -eq 0 ]]; then
+		_hour=""
+		_minutes="${_minutes}m"
+	else
+		_hour="${_hour}h"
+		_minutes="${_minutes}"
+	fi
+	estimated=" ($_hour$_minutes)"
+fi
+
+echo "$label $percent%$estimated"   # long text
 echo "$label"                       # short text
 echo "$color"                       # display color
