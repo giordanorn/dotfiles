@@ -2,6 +2,7 @@
 
 export EDITOR="nvim"
 export VISUAL="nvim"
+export PAGER="less"
 export BROWSER="firefox"
 export READER="evince"
 export TERMINAL="st"
