@@ -1,9 +1,8 @@
 #!/bin/sh bash
 
-alias ls="ls --color"
-alias la="ls -A --color"
-alias ll="ls -o -h --color"
-alias lla="ls -o -h -A --color"
+alias l="ls -oh --color"
+alias la="ls -lhA --color"
+alias ll="ls -lh --color"
 
 alias ..="cd .."
 
@@ -18,6 +17,8 @@ alias open="xdg-open"
 
 alias v="nvim"
 alias vim="nvim"
+
+alias j="jobs"
 
 # Shortcut to open configuration files
 alias vimrc="$EDITOR $HOME/.config/nvim/init.vim"
