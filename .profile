@@ -9,5 +9,5 @@ export TERMINAL="st"
 export SCRIPTS="$HOME/scripts"
 
 if [ "$(tty)" = "/dev/tty1" ]; then
-	pgrep -x i3 || exec startx
+    exec startx
 fi
