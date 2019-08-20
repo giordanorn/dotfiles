@@ -24,9 +24,10 @@ alias j="jobs"
 alias vimrc="$EDITOR $HOME/.config/nvim/init.vim"
 alias i3config="$EDITOR $HOME/.config/i3/config"
 
-alias confirm=$HOME/.scripts/confirm.sh
-alias screenlocker=$HOME/.scripts/screenlocker.sh
-alias system-options=$HOME/.scripts/system-options.sh
-alias mkalias=$HOME/.scripts/mkalias.sh
-alias clip=$HOME/.scripts/clip.sh
-alias wallpaper-set-random=$HOME/.scripts/wallpaper-set-random.sh
+# my scripts
+alias confirm="$HOME/.scripts/confirm.sh"
+alias screenlocker="$HOME/.scripts/screenlocker.sh"
+alias system-options="$HOME/.scripts/system-options.sh"
+alias mkalias="$HOME/.scripts/mkalias.sh"
+alias clip="$HOME/.scripts/clip.sh"
+alias wallpaper-set-random="$HOME/.scripts/wallpaper-set-random.sh"
