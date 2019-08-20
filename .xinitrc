@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 # set keyboard layout
 setxkbmap -model thinkpad60 -layout br -variant abnt2

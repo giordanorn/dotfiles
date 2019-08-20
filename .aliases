@@ -1,4 +1,4 @@
-#!/bin/sh bash
+#!/bin/sh
 
 alias l="ls -oh --color"
 alias la="ls -lhA --color"
