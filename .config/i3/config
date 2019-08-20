@@ -201,7 +201,7 @@ bar {
 ######################################
 
 # general configuration
-    i3bar_command               i3bar -t
+    i3bar_command               i3bar
     status_command              i3blocks
     position                    top
     separator_symbol            " "
