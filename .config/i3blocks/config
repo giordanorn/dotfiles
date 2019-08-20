@@ -3,27 +3,24 @@ separator_block_width=10
 markup=pango
 
 [memory]
-label=
+label=
 interval=30
 
 [disk]
-label=
+label=
 instance=/root
 interval=30
 
 [disk]
-label=
+label=
 instance=/home
 interval=30
 
 [wifi]
 instance=wlp3s0
-label=
 interval=5
 
 [network]
-label=
-color=#00FF00
 interval=5
 
 [downspeed]
@@ -45,16 +42,13 @@ interval=5
 #interval=5
 
 [temperature]
-label=
 interval=5
 
 [mediaplayer]
-instance=spotify
 interval=5
 signal=5
 
 [volume]
-label=
 instance=Master
 interval=once
 signal=10
@@ -63,7 +57,7 @@ signal=10
 interval=5
 
 [calendar]
-label=
+label=
 interval=60
 
 [time]

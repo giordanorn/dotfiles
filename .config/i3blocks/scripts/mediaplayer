@@ -1,26 +1,27 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-PLAYER=$BLOCK_INSTANCE
-LABEL=""
+test -z "$(playerctl status)" && exit 0
 
-if [ $(playerctl status) != "No players found" ]; then
-	LONG_OUTPUT=$(playerctl --player=$PLAYER metadata --format "{{ artist }} - {{ title }}")
-	SHORT_OUTPUT=$(playerctl --player=$PLAYER status)
-	if [ "$PLAYER" == "spotify" ]; then
-		LABEL=
-		COLOR="#84bd00"
-	else
-		LABEL=
-		COLOR=""
-	fi
+player=$(playerctl -l)
 
-	case $BLOCK_BUTTON in
-		1) notify-send "$(echo -e 'Listening on <i>'$PLAYER'</i> player')" "$(echo -e 'Track:\t' $(playerctl metadata title) '\nArtist:\t' $(playerctl metadata artist) '\nAlbum:\t' $(playerctl metadata album))" ;;
-	esac
-
-	echo "$LABEL $LONG_OUTPUT" # long text
-	echo "$LABEL $SHORT_OUTPUT" # short text
-	echo $COLOR
-	echo ""
+if [ "$player" = "spotify" ]; then
+    label=
+    color=#84bd00
+else
+    label=♫
+    color=""
 fi
 
+case $BLOCK_BUTTON in
+    1)
+        long_text="$(playerctl metadata --format "{{ artist }} - {{ title }}")";
+        short_text="$(playerctl status)" ;;
+    2) notify-send "Listening on $player" "$(playerctl metadata --format 'Track: {{title}}\nArtist: {{artist}}\nAlbum: {{album}}')";;
+    3) i3-msg "workspace 4: $label" > /dev/null;;
+esac
+
+
+echo "$label $long_text"
+echo "$label $short_text"
+echo "$color"
+echo ""

@@ -1,11 +1,12 @@
 #!/bin/sh
 
-MEM=`free -m | awk '/^Mem:/ { print "scale=1;" $7 " / 1000" }' | bc | sed 's/^\./0./'`
+MEM=$(free -m | awk '/^Mem:/ { print "scale=1;" $7 " / 1000" }' | bc | sed 's/^\./0./')
 
 case $BLOCK_BUTTON in
-	1) notify-send "Currently using $(free -h | awk '/^Mem:/ {print $3, "out of", $2 }') total memory" "Top 10 process by memory usage:\n$(ps -e --no-heading -orss,comm --sort -rss | head -n10 | awk '{ print int($1 / 1000) " M", "\t", $2, $3 }')";;
+	1) notify-send "Currently using $(free -h | awk '/^Mem:/ {print $3, "out of", $2 }') total memory" \
+        "Top 10 processes ordered by memory usage:\n$(ps -e --no-heading -orss,comm --sort -rss | head -n10 | awk '{ print int($1 / 1000) " M", "\t", $2, $3 }')";;
 esac
 
 
 echo "${MEM}G"
-test $MEM -le 200 && exit 33 || exit 0
+test "$MEM" -le 200 && exit 33 || exit 0
