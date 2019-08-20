@@ -38,9 +38,9 @@ set $TERMINAL                   st
 set $FILE_MANAGER               pcmanfm
 
 # folders
-set $SCRIPTS                    "$HOME/.scripts"
-set $SCREENSHOTS                "$(xdg-user-dir PICTURES)/screenshots"
-set $WALLPAPER                  "$(xdg-user-dir PICTURES)/wallpapers/10-3TkFymp.png"
+set $SCRIPTS                    $HOME/.scripts
+set $SCREENSHOTS                $(xdg-user-dir PICTURES)/screenshots
+set $WALLPAPER                  $(xdg-user-dir PICTURES)/wallpapers/10-3TkFymp.png
 
 # workspaces
 set $WS1                        "1: "
@@ -68,16 +68,16 @@ bindsym $MOD+space              focus mode_toggle
 bindsym $MOD+Shift+space        floating toggle
 
 # system options (shutdown, logout, etc) and lock-screen
-bindsym $MOD+End                exec $SCRIPTS/system-options.sh
-bindsym $MOD+Shift+x            exec $SCRIPTS/screenlocker.sh
+bindsym $MOD+End                exec "$SCRIPTS/system-options.sh"
+bindsym $MOD+Shift+x            exec "$SCRIPTS/screenlocker.sh"
 
 # reload the config file and restart i3
 bindsym $MOD+Shift+c            reload
 bindsym $MOD+Shift+r            restart
 
 # instant open applications
-bindsym $MOD+Return             exec $TERMINAL
-bindsym $MOD+e                  exec $FILE_MANAGER -n $(xdg-user-dir DESKTOP)
+bindsym $MOD+Return             exec "$TERMINAL"
+bindsym $MOD+e                  exec "$FILE_MANAGER -n $(xdg-user-dir DESKTOP)"
 
 # window actions
 bindsym $MOD+q                  kill
