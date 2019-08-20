@@ -244,5 +244,5 @@ exec --no-startup-id            dunst
 exec --no-startup-id            xss-lock -- $SCRIPTS/screenlocker.sh
 
 # set compositor
-exec --no-startup-id            compton --daemon -cCGf --blur-background-frame --backend glx --shadow-exclude 'bounding_shaped'
+#exec --no-startup-id            compton --daemon -cCGf --blur-background-frame --backend glx --shadow-exclude 'bounding_shaped'
 
