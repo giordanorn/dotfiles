@@ -4,7 +4,7 @@
 #WALLPAPER=$(find /usr/local/share/backgrounds | shuf | head -n1) 
 
 # get current wallpaper set by feh
-WALLPAPER=$(cat $HOME/.fehbg | grep feh | awk '{ print $3 }' | tr -d \') 
+WALLPAPER=$(cat "$HOME/.fehbg" | grep feh | awk '{ print $4 }' | tr -d \') 
 
 # suspend notification daemon
 pkill -u "$USER" -USR1 dunst
@@ -15,7 +15,7 @@ pgrep -x i3lock || \
 		--force-clock \
 		--datestr="%A %B %e" \
 		--line-uses-inside \
-		--image=$WALLPAPER \
+		--image="$WALLPAPER" \
 		--ignore-empty-password \
 		--indicator \
 		--insidecolor=282828ff \
