@@ -205,6 +205,7 @@ bar {
     status_command              i3blocks
     position                    top
     separator_symbol            " "
+    font pango:                 Open Sans Bold 12
 }
 
 # show/hide bar
