@@ -1,9 +1,8 @@
 syntax on
 set number relativenumber
 set encoding=utf-8
-
-set tabstop=4
-set shiftwidth=4  
+set linebreak
+set expandtab autoindent tabstop=4 shiftwidth=4
 
 if !&scrolloff
 	set scrolloff=3       " Show next 3 lines while scrolling.
