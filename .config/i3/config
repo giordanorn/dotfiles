@@ -38,9 +38,9 @@ set $TERMINAL                   st
 set $FILE_MANAGER               pcmanfm
 
 # folders
-set $SCRIPTS                    $HOME/.scripts
-set $SCREENSHOTS                $(xdg-user-dir PICTURES)/screenshots
-set $WALLPAPER                  $(xdg-user-dir PICTURES)/wallpapers/10-3TkFymp.png
+set $SCRIPTS                    "$HOME/.scripts"
+set $SCREENSHOTS                "$(xdg-user-dir PICTURES)/screenshots"
+set $WALLPAPER                  "$(xdg-user-dir PICTURES)/wallpapers/10-3TkFymp.png"
 
 ##########################
 #        BINDINGS        #
