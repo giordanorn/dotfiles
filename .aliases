@@ -1,26 +1,21 @@
 #!/bin/sh
 
-alias l="ls -oh --color"
-alias la="ls -lhA --color"
-alias ll="ls -lh --color"
-
+alias l="ls -lha --color"
+alias ll="ls -oh --color"
 alias ..="cd .."
-
 alias mv="mv -i"
-
 alias grep="grep --color=auto"
 alias fgrep="fgrep --color=auto"
 alias egrep="egrep --color=auto"
 alias less="less -R"
+alias open=xdg-open
+alias v=nvim
+alias j=jobs
+alias t="tmux -u"
+alias tt="tmux -u attach-session"
+alias shck=shellcheck
 
-alias open="xdg-open"
-
-alias v="nvim"
-alias vim="nvim"
-
-alias j="jobs"
-
-# Shortcut to open configuration files
+# edit config files
 alias vimrc="$EDITOR $HOME/.config/nvim/init.vim"
 alias i3config="$EDITOR $HOME/.config/i3/config"
 
