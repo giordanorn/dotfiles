@@ -1,19 +1,19 @@
-#!/usr/bin/bash
+#!/bin/sh
 
 # status percent number (less equal than)
-percent_crit=10
-percent_low=25
+percent_crit=15
+percent_low=35
 percent_avg=55
 percent_good=75
 
 # colors
-color_crit="#FF0000"
-color_low="#FFA500"
-color_avg="#FFFF00"
-color_good=""		     # fill this field if you want to use this color
-color_full="#00FF00"
+color_crit="#ff0000"
+color_low="#ffa500"
+color_avg="#ffff00"
+color_good=""
+color_full="#00ff00"
 
-# icons for the label (FontAwesome)
+# glyphs for label (FontAwesome)
 bat_crit=""
 bat_low=""
 bat_avg=""
@@ -22,21 +22,21 @@ bat_full=""
 bat_plugged=""
 
 # main command (acpi)
-ac_info=`acpi --ac-adapter`
-bat_info=`acpi --battery`
+ac_info=$(acpi --ac-adapter)
+bat_info=$(acpi --battery)
 
 # set battery label and color based on percent level
-percent=`echo "$bat_info" | cut -d " " -f4 | tr -d ,%`
-if [[ $percent -le $percent_crit ]]; then
+percent=$(echo "$bat_info" | cut -d " " -f4 | tr -d ,%)
+if [ "$percent" -le "$percent_crit" ]; then
 	color=$color_crit
 	label=$bat_crit
-elif [[ $percent -le $percent_low ]]; then
+elif [ "$percent" -le "$percent_low" ]; then
 	color=$color_low
 	label=$bat_low
-elif [[ $percent -le $percent_avg ]]; then
+elif [ "$percent" -le "$percent_avg" ]; then
 	color=$color_avg
 	label=$bat_avg
-elif [[ $percent -le $percent_good ]]; then
+elif [ "$percent" -le "$percent_good" ]; then
 	color=$color_good
 	label=$bat_good
 else
@@ -44,21 +44,21 @@ else
 fi
 
 # set plugged label if is plugged and color to green if is fully charged
-plugged=`echo "$ac_info" | cut -c12-`
-if [[ "$plugged" = "on-line" ]]; then
-	label=$bat_plugged
+plugged=$(echo "$ac_info" | cut -c12-)
+if [ "$plugged" = "on-line" ]; then
+	label="$bat_plugged"
 	color=""
-	if [[ $percent -ge 99 ]]; then
+	if [ "$percent" -ge 99 ]; then
 		color=$color_full
 	fi
 fi
 
 # format estimated time
-estimated_time=`echo "$bat_info" | cut -d " " -f5 | cut -c1-5 | tr -d a-zA-Z`
-if [[ -n $estimated_time ]]; then
-	_hour=`echo "$estimated_time" | cut -c1-2`
-	_minutes=`echo "$estimated_time" | cut -c4-5`
-	if [[ $_hour -eq 0 ]]; then
+estimated_time=$(echo "$bat_info" | cut -d " " -f5 | cut -c1-5 | tr -d a-zA-Z)
+if [ -n "$estimated_time" ]; then
+	_hour=$(echo "$estimated_time" | cut -c1-2)
+	_minutes=$(echo "$estimated_time" | cut -c4-5)
+	if [ "$_hour" -eq 0 ]; then
 		_hour=""
 		_minutes="${_minutes}m"
 	else
@@ -68,6 +68,19 @@ if [[ -n $estimated_time ]]; then
 	estimated=" ($_hour$_minutes)"
 fi
 
-echo "$label $percent%$estimated"   # long text
-echo "$label"                       # short text
-echo "$color"                       # display color
+long_text=""
+short_text=""
+
+case $BLOCK_BUTTON in
+    1) long_text="$percent%$estimated" ;;
+esac
+
+echo "$label $long_text"
+echo "$label $short_text"
+echo "$color"
+
+if [ "$percent" -le 10 ] && [ ! "$plugged" = "on-line" ]; then
+    exit 33
+else
+    exit 0
+fi
