@@ -31,3 +31,6 @@ alias system-options="$HOME/.scripts/system-options.sh"
 alias mkalias="$HOME/.scripts/mkalias.sh"
 alias clip="$HOME/.scripts/clip.sh"
 alias wallpaper-set-random="$HOME/.scripts/wallpaper-set-random.sh"
+
+# tmp
+alias fun="ssh haskell.imd.ufrn.br"
