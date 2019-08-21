@@ -7,12 +7,12 @@ label=
 interval=30
 
 [disk]
-label=
+label=
 instance=/root
 interval=30
 
 [disk]
-label=
+label=
 instance=/home
 interval=30
 
@@ -57,7 +57,7 @@ signal=10
 interval=5
 
 [calendar]
-label=
+label=
 interval=60
 
 [time]
