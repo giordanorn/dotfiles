@@ -1,13 +1,13 @@
 #!/bin/sh
 
-## get a random file
-#WALLPAPER=$(find /usr/local/share/backgrounds | shuf | head -n1) 
-
 # get current wallpaper set by feh
-WALLPAPER=$(cat "$HOME/.fehbg" | grep feh | awk '{ print $4 }' | tr -d \') 
+wallpaper=$(grep feh < "$HOME/.fehbg" | awk '{ print $4 }' | tr -d \') 
 
 # suspend notification daemon
 pkill -u "$USER" -USR1 dunst
+
+# turn screen off
+sleep 2 && xset dpms force off &
 
 pgrep -x i3lock || \
 	i3lock \
@@ -15,7 +15,7 @@ pgrep -x i3lock || \
 		--force-clock \
 		--datestr="%A %B %e" \
 		--line-uses-inside \
-		--image="$WALLPAPER" \
+		--image="$wallpaper" \
 		--ignore-empty-password \
 		--indicator \
 		--insidecolor=282828ff \
@@ -33,7 +33,7 @@ pgrep -x i3lock || \
 		--radius=120 \
 		--veriftext="" \
 		--wrongtext="" \
-		--noinputtext="" \
+		--noinputtext=""
 
 # resume notification daemon
 pkill -u "$USER" -USR2 dunst

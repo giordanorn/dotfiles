@@ -8,7 +8,7 @@ if [ "$player" = "spotify" ]; then
     label=
     color=#84bd00
 else
-    label=♫
+    label=
     color=""
 fi
 
@@ -17,7 +17,7 @@ case $BLOCK_BUTTON in
         long_text="$(playerctl metadata --format "{{ artist }} - {{ title }}")";
         short_text="$(playerctl status)" ;;
     2) notify-send "Listening on $player" "$(playerctl metadata --format 'Track: {{title}}\nArtist: {{artist}}\nAlbum: {{album}}')";;
-    3) i3-msg "workspace 4: $label" > /dev/null;;
+    3) i3-msg "workspace 4: " > /dev/null;;
 esac
 
 

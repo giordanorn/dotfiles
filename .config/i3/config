@@ -6,7 +6,7 @@
 #        WINDOW STYLE        #
 ##############################
 
-font pango: Open Sans Bold 9
+font pango: Inconsolata Bold 11
 focus_follows_mouse no
 floating_maximum_size 1366 x 768
 
@@ -15,10 +15,9 @@ for_window [class="^.*"] border pixel 2
 hide_edge_borders smart
 
 # gaps configuration
-#smart_gaps on
-#gaps inner 2
-#gaps inner 4
-#gaps outer 2
+smart_gaps on
+gaps inner 16
+gaps outer 2
 
 ###########################
 #        CONSTANTS        #
@@ -46,7 +45,7 @@ set $WALLPAPER                  $(xdg-user-dir PICTURES)/wallpapers/10-3TkFymp.p
 set $WS1                        "1: "
 set $WS2                        "2: "
 set $WS3                        "3: "
-set $WS4                        "4: "
+set $WS4                        "4: "
 set $WS5                        "5: "
 set $WS6                        "6: "
 set $WS7                        "7: "
@@ -68,8 +67,8 @@ bindsym $MOD+space              focus mode_toggle
 bindsym $MOD+Shift+space        floating toggle
 
 # system options (shutdown, logout, etc) and lock-screen
-bindsym $MOD+End                exec "$SCRIPTS/system-options.sh"
-bindsym $MOD+Shift+x            exec "$SCRIPTS/screenlocker.sh"
+bindsym $MOD+End                exec sh $SCRIPTS/system-options.sh
+bindsym $MOD+Shift+x            exec sh $SCRIPTS/screenlocker.sh
 
 # reload the config file and restart i3
 bindsym $MOD+Shift+c            reload
@@ -234,9 +233,12 @@ for_window [instance="gitkraken"]                   move to workspace $WS1
 for_window [instance="code-oss"]                    move to workspace $WS1
 for_window [instance="unityhub"]                    move to workspace $WS1
 for_window [instance="Unity"]                       move to workspace $WS1
+for_window [instance="godot"]                       move to workspace $WS1
 for_window [instance="firefox"]                     move to workspace $WS2
+for_window [class="Firefox"]                        move to workspace $WS2
 for_window [class="Telegram"]                       move to workspace $WS3
 for_window [instance="spotify"]                     move to workspace $WS4
+for_window [instance="vlc"]                         move to workspace $WS4
 for_window [class="Steam"]                          move to workspace $WS5
 for_window [instance="pavucontrol"]                 move to workspace $WS7
 for_window [instance="qvidcap"]                     move to workspace $WS8
@@ -255,8 +257,7 @@ for_window [instance="nm-connection-editor"]        floating enable
 exec --no-startup-id            dunst
 
 # trigger i3lock when close lid
-exec --no-startup-id            xss-lock -- $SCRIPTS/screenlocker.sh
+#exec --no-startup-id            xss-lock -- $SCRIPTS/screenlocker.sh
 
 # set compositor
 #exec --no-startup-id            compton --daemon -cCGf --blur-background-frame --backend glx --shadow-exclude 'bounding_shaped'
-

@@ -72,7 +72,13 @@ long_text=""
 short_text=""
 
 case $BLOCK_BUTTON in
-    1) long_text="$percent%$estimated" ;;
+    1)
+        if [ -z "$bat_info"]; then
+            long_text="no battery"
+        else
+            long_text="$percent%$estimated"
+        fi ;;
+
 esac
 
 echo "$label $long_text"

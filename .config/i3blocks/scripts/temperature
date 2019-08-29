@@ -1,6 +1,6 @@
 #!/bin/sh
 
-temp=$(acpi -t | grep -E -o '[0-9]*\.' | tr -d .)
+temp=$(acpi -t | grep -E -o '[0-9]*\.' | tr -d . | head -n1)
  
 label=""
 long_text=""
@@ -32,3 +32,4 @@ echo "$label $short_text"
 echo "$color"
 
 test "$temp" -ge 90 && exit 33 || exit 0
+

@@ -28,4 +28,4 @@ alias clip="$HOME/.scripts/clip.sh"
 alias wallpaper-set-random="$HOME/.scripts/wallpaper-set-random.sh"
 
 # tmp
-alias fun="ssh haskell.imd.ufrn.br"
+alias fun="ssh giordanorn@haskell.imd.ufrn.br"

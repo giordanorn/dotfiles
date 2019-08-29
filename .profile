@@ -6,7 +6,7 @@ export PAGER="less"
 export BROWSER="firefox"
 export READER="evince"
 export TERMINAL="st"
-export SCRIPTS="$HOME/scripts"
+export SCRIPTS="$HOME/.scripts"
 
 if [ "$(tty)" = "/dev/tty1" ]; then
     exec startx
