@@ -37,9 +37,8 @@ set $TERMINAL                   st
 set $FILE_MANAGER               pcmanfm
 
 # folders
-set $SCRIPTS                    $HOME/.scripts
+set $SCRIPTS                    $HOME/scripts
 set $SCREENSHOTS                $(xdg-user-dir PICTURES)/screenshots
-set $WALLPAPER                  $(xdg-user-dir PICTURES)/wallpapers/10-3TkFymp.png
 
 # workspaces
 set $WS1                        "1: "
@@ -69,13 +68,14 @@ bindsym $MOD+Shift+space        floating toggle
 # system options (shutdown, logout, etc) and lock-screen
 bindsym $MOD+End                exec sh $SCRIPTS/system-options.sh
 bindsym $MOD+Shift+x            exec sh $SCRIPTS/screenlocker.sh
+bindsym $MOD+Shift+z            exec xset dpms force off
 
 # reload the config file and restart i3
 bindsym $MOD+Shift+c            reload
 bindsym $MOD+Shift+r            restart
 
 # instant open applications
-bindsym $MOD+Return             exec "$TERMINAL"
+bindsym $MOD+Return             exec i3-sensible-terminal
 bindsym $MOD+e                  exec "$FILE_MANAGER -n $(xdg-user-dir DESKTOP)"
 
 # window actions
@@ -83,7 +83,7 @@ bindsym $MOD+q                  kill
 bindsym $MOD+f                  fullscreen toggle
 
 # launch applications
-bindsym $MOD+o                  exec j4-dmenu-desktop --no-generic --dmenu="dmenu -i -f -p 'Lauch '"
+bindsym $MOD+o                  exec i3-dmenu-desktop --dmenu="dmenu -i -p 'Launch'"
 bindsym $MOD+Shift+o            exec dmenu_run
 
 # change container layout
@@ -234,8 +234,7 @@ for_window [instance="code-oss"]                    move to workspace $WS1
 for_window [instance="unityhub"]                    move to workspace $WS1
 for_window [instance="Unity"]                       move to workspace $WS1
 for_window [instance="godot"]                       move to workspace $WS1
-for_window [instance="firefox"]                     move to workspace $WS2
-for_window [class="Firefox"]                        move to workspace $WS2
+for_window [class="firefox"]                        move to workspace $WS2
 for_window [class="Telegram"]                       move to workspace $WS3
 for_window [instance="spotify"]                     move to workspace $WS4
 for_window [instance="vlc"]                         move to workspace $WS4
