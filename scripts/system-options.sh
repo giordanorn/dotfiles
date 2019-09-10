@@ -2,8 +2,7 @@
 
 OPTION=$(printf "Shutdown\nReboot\nHibernate\nSuspend\nLogout\nNevermind" | dmenu -i -p "What do you want to do?")
 
-# IT NEEDS A BETTER SOLUTION
-CONFIRM="sh $HOME/.scripts/confirm.sh"
+CONFIRM="sh $HOME/scripts/confirm.sh"
 
 case $OPTION in
 	"Shutdown")
