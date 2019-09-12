@@ -5,9 +5,8 @@ temp=$(acpi -t | grep -E -o '[0-9]*\.' | tr -d . | head -n1)
 label=""
 long_text=""
 short_text=""
-color=""
+color="#eeeeee"
 
-# TODO provide colors
 if [ "$temp" -ge 90 ]; then
     label=
 elif [ "$temp" -ge 70 ]; then
