@@ -28,15 +28,15 @@ plugged="$(echo "$ac_info" | cut -c12-)"
 
 # if there is no battery
 if [ "$bat_info" = "" ]; then
-    # I can't imagine a situation with no battery and unplugged, but just let this if here for guarantee
     if [ "$plugged" = "on-line" ]; then
         label="$bat_plugged"
-        color="#eeeeee"
+        color="$color_good"
     fi
 else
-    integer percent="$(echo "$bat_info" | cut -d " " -f4 | tr -d ,%)"
+    percent="$(echo "$bat_info" | cut -d " " -f4 | tr -d ,%)"
     if [ "$plugged" = "on-line" ]; then
         label="$bat_plugged"
+        color="$color_good"
     else
         # set battery label and color according to percent level, if has a battery
         if [ "$percent" -le "$percent_crit" ]; then
@@ -53,6 +53,7 @@ else
             label=$bat_good
         else
             label=$bat_full
+            color="$color_good"
         fi
         if [ "$percent" -ge 99 ]; then
             color=$color_full
