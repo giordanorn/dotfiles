@@ -35,28 +35,28 @@ if [ "$bat_info" = "" ]; then
 else
     percent="$(echo "$bat_info" | cut -d " " -f4 | tr -d ,%)"
     if [ "$plugged" = "on-line" ]; then
-        label="$bat_plugged"
-        color="$color_good"
+        label=$bat_plugged
+        color=$color_good
+        if [ "$percent" -ge 99 ]; then
+            color=$color_full
+        fi
     else
         # set battery label and color according to percent level, if has a battery
         if [ "$percent" -le "$percent_crit" ]; then
-            color=$color_crit
             label=$bat_crit
+            color=$color_crit
         elif [ "$percent" -le "$percent_low" ]; then
-            color=$color_low
             label=$bat_low
+            color=$color_low
         elif [ "$percent" -le "$percent_avg" ]; then
-            color=$color_avg
             label=$bat_avg
+            color=$color_avg
         elif [ "$percent" -le "$percent_good" ]; then
-            color=$color_good
             label=$bat_good
+            color=$color_good
         else
             label=$bat_full
-            color="$color_good"
-        fi
-        if [ "$percent" -ge 99 ]; then
-            color=$color_full
+            color=$color_good
         fi
     fi
     # format estimated time for fully charging or discharging

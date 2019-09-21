@@ -24,4 +24,3 @@ esac
 echo "$label $long_text"
 echo "$label $short_text"
 echo "$color"
-echo ""

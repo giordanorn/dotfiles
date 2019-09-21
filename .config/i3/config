@@ -240,6 +240,7 @@ for_window [instance="spotify"]                     move to workspace $WS4
 for_window [instance="vlc"]                         move to workspace $WS4
 for_window [class="Steam"]                          move to workspace $WS5
 for_window [instance="pavucontrol"]                 move to workspace $WS7
+for_window [class="Transmission"]                 move to workspace $WS7
 for_window [instance="qvidcap"]                     move to workspace $WS8
 for_window [class="Thunderbird"]                    move to workspace $WS10
 
