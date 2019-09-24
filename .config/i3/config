@@ -135,8 +135,8 @@ bindsym $MOD+Shift+0            move container to workspace $WS10, workspace $WS
 
 # take screenshot (save full screenshot on disk / copy full screenshot to clipboard / copy selected area to clipboard)
 bindsym Print                   exec mkdir -p $SCREENSHOTS && scrot --silent --quality 100 $SCREENSHOTS/screenshot_$(date +"IMG_%Y%m%d_%H%M%S").png
-bindsym $MOD+Print              exec escrotum -C
-bindsym $MOD+Shift+Print        exec --no-startup-id escrotum -Cs
+bindsym $MOD+Print              exec mkdir -p $SCREENSHOTS && scrot --silent --quality 100 $SCREENSHOTS/screenshot_$(date +"IMG_%Y%m%d_%H%M%S").png -e 'xclip -selection clipboard -target image/png -i $f'
+bindsym $MOD+Shift+Print        exec --no-startup-id mkdir -p $SCREENSHOTS && sleep 0.2 && scrot --silent --quality 100 --select $SCREENSHOTS/screenshot_$(date +"IMG_%Y%m%d_%H%M%S").png -e 'xclip -selection clipboard -target image/png -i $f'
 
 # media controlling
 bindsym XF86AudioPlay           exec playerctl play-pause, exec pkill -SIGRTMIN+5 i3blocks
@@ -241,6 +241,7 @@ for_window [instance="vlc"]                         move to workspace $WS4
 for_window [class="Steam"]                          move to workspace $WS5
 for_window [instance="pavucontrol"]                 move to workspace $WS7
 for_window [class="Transmission"]                 move to workspace $WS7
+for_window [class="lxappearance"]                 move to workspace $WS7
 for_window [instance="qvidcap"]                     move to workspace $WS8
 for_window [class="Thunderbird"]                    move to workspace $WS10
 
