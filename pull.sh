@@ -15,12 +15,11 @@ do
 	if diff --color=auto -N "$dotfile" "$userfile"; then
 		echo "File is up to date."
 	else
-		printf "Files have been changed. Do you want to apply (%s -> dotfiles)? (y/N) " "$USER"
+		printf "Files have been changed. Do you want to apply ($userfile -> $dotfile)? (y/N) "
 		read -r answer
-		if [ "$answer" != "${answer#[Yy]}" ] ;then
+		if [ ! "$answer" = "${answer#[Yy]}" ] ;then
 			echo Copying file...
-			cp "$userfile" "$dotfile"
-			echo Done.
+			cp "$userfile" "$dotfile" && echo Done. || echo Failed.
 		else
 			echo Skipping.
 		fi
