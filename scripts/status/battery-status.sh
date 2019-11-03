@@ -1,0 +1,99 @@
+#!/bin/sh
+
+# status percent number (less equal than)
+percent_crit=15
+percent_low=35
+percent_avg=55
+percent_good=75
+
+# colors
+color_crit="#ff0000"
+color_low="#ffa500"
+color_avg="#ffff00"
+color_good="#eeeeee"
+color_full="#00ff00"
+
+# glyphs for label (FontAwesome)
+bat_crit=""
+bat_low=""
+bat_avg=""
+bat_good=""
+bat_full=""
+bat_plugged=""
+
+# main command (acpi)
+ac_info=$(acpi --ac-adapter)
+bat_info=$(acpi --battery)
+plugged="$(echo "$ac_info" | cut -c12-)"
+
+# if there is no battery
+if [ "$bat_info" = "" ]; then
+    if [ "$plugged" = "on-line" ]; then
+        label="$bat_plugged"
+        color="$color_good"
+    fi
+else
+    percent="$(echo "$bat_info" | cut -d " " -f4 | tr -d ,%)"
+    if [ "$plugged" = "on-line" ]; then
+        label=$bat_plugged
+        color=$color_good
+        if [ "$percent" -ge 99 ]; then
+            color=$color_full
+        fi
+    else
+        # set battery label and color according to percent level, if has a battery
+        if [ "$percent" -le "$percent_crit" ]; then
+            label=$bat_crit
+            color=$color_crit
+        elif [ "$percent" -le "$percent_low" ]; then
+            label=$bat_low
+            color=$color_low
+        elif [ "$percent" -le "$percent_avg" ]; then
+            label=$bat_avg
+            color=$color_avg
+        elif [ "$percent" -le "$percent_good" ]; then
+            label=$bat_good
+            color=$color_good
+        else
+            label=$bat_full
+            color=$color_good
+        fi
+    fi
+    # format estimated time for fully charging or discharging
+    estimated_time="$(echo "$bat_info" | cut -d " " -f5 | cut -c1-5 | tr -d a-zA-Z)"
+    if [ -n "$estimated_time" ]; then
+        _hour=$(echo "$estimated_time" | cut -c1-2)
+        _minutes=$(echo "$estimated_time" | cut -c4-5)
+        if [ "$_hour" -eq 0 ]; then
+            _hour=""
+            _minutes="${_minutes}m"
+        else
+            _hour="${_hour}h"
+            _minutes="${_minutes}"
+        fi
+        estimated=" ($_hour$_minutes)"
+    fi
+fi
+
+long_text=""
+short_text=""
+
+case $BLOCK_BUTTON in
+    1)
+        if [ -z "$bat_info" ]; then
+            long_text="no battery"
+        else
+            long_text="$percent%$estimated"
+        fi ;;
+
+esac
+
+echo "$label $long_text"
+echo "$label $short_text"
+echo "$color"
+
+if [ -n "$bat_info" ]; then
+    test "$percent" -le 10 && test ! "$plugged" = "on-line" && exit 33
+else
+    exit 0
+fi

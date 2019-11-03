@@ -1,0 +1,55 @@
+#!/bin/sh
+
+# Use the provided interface, otherwise the device used for the default route.
+if [[ -n $BLOCK_INSTANCE ]]; then
+  IF="$BLOCK_INSTANCE"
+else
+  IF="$(ip route | awk '/^default/ { print $5 ; exit }')"
+fi
+
+[[ ! -d /sys/class/net/${IF} ]] && exit
+
+if ! [ -e "/sys/class/net/${IF}/operstate" ] || ! [ "`cat /sys/class/net/${IF}/operstate`" = "up" ]
+then
+    label=""
+    color="#FF0000"
+
+    case $BLOCK_BUTTON in
+        1)  \
+            long_text="no internet connection"; \
+            short_text="offline" ;;
+    esac
+
+else
+    case $1 in
+      -4)
+        AF=inet ;;
+      -6)
+        AF=inet6 ;;
+      *)
+        AF=inet6? ;;
+    esac
+
+    ipaddr=$(ip addr show $IF | perl -n -e "/$AF ([^\/]+).* scope global/ && print \$1 and exit")
+    ssid=$(iwgetid -r)
+
+    label=""
+    long_text=""
+    short_text=""
+    color="#00FF00"
+
+    case $BLOCK_BUTTON in
+        1) \
+            long_text="$ipaddr"; \
+            short_text="$ipaddr";;
+    esac
+fi
+
+case $BLOCK_BUTTON in
+	2) notify-send "Network Status" "$(printf "Connected at <i>%s</i>\nCurrent IP address %s\n" "$ssid" "$ipaddr")" ;;
+    3) nm-connection-editor > /dev/null ;;
+esac
+
+echo "$label $long_text"
+echo "$label $short_text"
+echo "$color"

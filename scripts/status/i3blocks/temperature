@@ -1,0 +1,34 @@
+#!/bin/sh
+
+temp=$(acpi -t | grep -E -o '[0-9]*\.' | tr -d . | head -n1)
+ 
+label=""
+long_text=""
+short_text=""
+color="#eeeeee"
+
+if [ "$temp" -ge 90 ]; then
+    label=
+elif [ "$temp" -ge 70 ]; then
+    label=
+    color="#ff7f00"
+elif [ "$temp" -ge 45 ]; then
+    label=
+elif [ "$temp" -ge 30 ]; then
+    label=
+else
+    label=
+fi
+
+case $BLOCK_BUTTON in
+    1)
+        long_text="$temp °C";
+        short_text="$temp C";;
+esac
+
+echo "$label $long_text"
+echo "$label $short_text"
+echo "$color"
+
+test "$temp" -ge 90 && exit 33 || exit 0
+
