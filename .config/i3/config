@@ -41,17 +41,27 @@ set $SCRIPTS                    $HOME/scripts
 set $SCREENSHOTS                $(xdg-user-dir PICTURES)/screenshots
 
 # workspaces
+set $WS_telegram                "t: "
+set $WS_firefox                 "f: "
+set $WS_mail                    "m: "
+set $WS_spotify                 "p: "
+set $WS_git                     "g: "
+set $WS_steam                   "s: "
+set $WS_camera                  "c: "
+set $WS_wine                    "w: "
+set $WS_explorer                "e: "
+
 set $WS1                        "1: "
-set $WS2                        "2: "
-set $WS3                        "3: "
-set $WS4                        "4: "
-set $WS5                        "5: "
+set $WS2                        "2"
+set $WS3                        "3"
+set $WS4                        "4"
+set $WS5                        "5"
 set $WS6                        "6: "
 set $WS7                        "7: "
-set $WS8                        "8: "
+set $WS8                        "8"
 set $WS9                        "9: "
-set $WS10                       "10: "
-
+set $WS10                       "10"
+ 
 ##########################
 #        BINDINGS        #
 ##########################
@@ -71,29 +81,26 @@ bindsym $MOD+Shift+x            exec sh $SCRIPTS/screenlocker.sh
 bindsym $MOD+Shift+z            exec xset dpms force off
 
 # reload the config file and restart i3
-bindsym $MOD+Shift+c            reload
+#bindsym $MOD+Shift+c            reload
 bindsym $MOD+Shift+r            restart
 
-# instant open applications
-bindsym $MOD+Return             exec i3-sensible-terminal
-bindsym $MOD+e                  exec "$FILE_MANAGER -n $(xdg-user-dir DESKTOP)"
 
 # window actions
-bindsym $MOD+q                  kill
-bindsym $MOD+f                  fullscreen toggle
+bindsym $MOD+Shift+q            kill
+bindsym $MOD+Shift+f            fullscreen toggle
 
 # launch applications
-bindsym $MOD+o                  exec i3-dmenu-desktop --dmenu="dmenu -i -p 'Launch'"
+bindsym $MOD+o                  exec i3-dmenu-desktop --dmenu="dmenu -i -p 'Launch Application '"
 bindsym $MOD+Shift+o            exec dmenu_run
 
 # change container layout
 bindsym $MOD+a                  layout tabbed
-bindsym $MOD+s                  layout stacking
+bindsym $MOD+q                  layout stacking
 bindsym $MOD+d                  layout toggle split
 
 # split in horizontal and vertical
-bindsym $MOD+c                  split h
-bindsym $MOD+v                  split v
+bindsym $MOD+x                  split h
+bindsym $MOD+z                  split v
 
 # controlling windows focus, movement and resizing
 bindsym $MOD+$LEFT              focus left
@@ -109,7 +116,21 @@ bindsym $MOD+Control+$DOWN      resize grow height 4 px or 4 ppt
 bindsym $MOD+Control+$UP        resize shrink height 4 px or 4 ppt
 bindsym $MOD+Control+$RIGHT     resize grow width 4 px or 4 ppt
 
-# workspace bindings
+# workspace bindings (application specific)
+bindsym $MOD+t                  workspace $WS_telegram
+bindsym $MOD+f                  workspace $WS_firefox
+bindsym $MOD+m                  workspace $WS_mail
+bindsym $MOD+p                  workspace $WS_spotify
+bindsym $MOD+g                  workspace $WS_git
+bindsym $MOD+c                  workspace $WS_camera
+bindsym $MOD+s                  workspace $WS_steam
+bindsym $MOD+w                  workspace $WS_wine
+bindsym $MOD+e                  workspace $WS_explorer
+
+# instant launch specific applications
+bindsym $MOD+Return             exec i3-sensible-terminal
+
+# workspace bindings (generic)
 bindsym $MOD+1                  workspace $WS1
 bindsym $MOD+2                  workspace $WS2
 bindsym $MOD+3                  workspace $WS3
@@ -135,8 +156,8 @@ bindsym $MOD+Shift+0            move container to workspace $WS10, workspace $WS
 
 # take screenshot (save full screenshot on disk / copy full screenshot to clipboard / copy selected area to clipboard)
 bindsym Print                   exec mkdir -p $SCREENSHOTS && scrot --silent --quality 100 $SCREENSHOTS/screenshot_$(date +"IMG_%Y%m%d_%H%M%S").png
-bindsym $MOD+Print              exec mkdir -p $SCREENSHOTS && scrot --silent --quality 100 $SCREENSHOTS/screenshot_$(date +"IMG_%Y%m%d_%H%M%S").png -e 'xclip -selection clipboard -target image/png -i $f'
-bindsym $MOD+Shift+Print        exec --no-startup-id mkdir -p $SCREENSHOTS && sleep 0.2 && scrot --silent --quality 100 --select $SCREENSHOTS/screenshot_$(date +"IMG_%Y%m%d_%H%M%S").png -e 'xclip -selection clipboard -target image/png -i $f'
+bindsym $MOD+Print              exec escrotum -C
+bindsym $MOD+Shift+Print        exec --no-startup-id escrotum -Cs
 
 # media controlling
 bindsym XF86AudioPlay           exec playerctl play-pause, exec pkill -SIGRTMIN+5 i3blocks
@@ -216,7 +237,7 @@ bar {
     status_command              i3blocks
     position                    top
     separator_symbol            " "
-    font pango:                 Open Sans Bold 12
+    font pango:                 Cantarell Bold 12
 }
 
 # show/hide bar
@@ -229,21 +250,23 @@ bindsym $MOD+Ctrl+Shift+Tab     bar mode hide
 ####################################
 
 # assign applications to workspaces
-for_window [instance="gitkraken"]                   move to workspace $WS1
+for_window [class="firefox"]                        move to workspace $WS_firefox
+for_window [class="Telegram"]                       move to workspace $WS_telegram
+for_window [class="Thunderbird"]                    move to workspace $WS_mail
+for_window [instance="spotify"]                     move to workspace $WS_spotify
+for_window [instance="gitkraken"]                   move to workspace $WS_git
+for_window [instance="qvidcap"]                     move to workspace $WS_camera
+for_window [class="Steam"]                          move to workspace $WS_steam
+for_window [class="Wine"]                           move to workspace $WS_wine
+
 for_window [instance="code-oss"]                    move to workspace $WS1
 for_window [instance="unityhub"]                    move to workspace $WS1
 for_window [instance="Unity"]                       move to workspace $WS1
 for_window [instance="godot"]                       move to workspace $WS1
-for_window [class="firefox"]                        move to workspace $WS2
-for_window [class="Telegram"]                       move to workspace $WS3
-for_window [instance="spotify"]                     move to workspace $WS4
-for_window [instance="vlc"]                         move to workspace $WS4
-for_window [class="Steam"]                          move to workspace $WS5
 for_window [instance="pavucontrol"]                 move to workspace $WS7
-for_window [class="Transmission"]                 move to workspace $WS7
-for_window [class="lxappearance"]                 move to workspace $WS7
-for_window [instance="qvidcap"]                     move to workspace $WS8
-for_window [class="Thunderbird"]                    move to workspace $WS10
+for_window [class="Transmission"]                   move to workspace $WS7
+for_window [class="Blueman"]                        move to workspace $WS7
+for_window [instance="arandr"]                         move to workspace $WS7
 
 # force float window
 for_window [instance="pavucontrol"]                 floating enable
@@ -256,9 +279,6 @@ for_window [instance="nm-connection-editor"]        floating enable
 
 # start notification daemon
 exec --no-startup-id            dunst
-
-# trigger i3lock when close lid
-#exec --no-startup-id            xss-lock -- $SCRIPTS/screenlocker.sh
 
 # set compositor
 #exec --no-startup-id            compton --daemon -cCGf --blur-background-frame --backend glx --shadow-exclude 'bounding_shaped'
